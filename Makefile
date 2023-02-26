@@ -43,7 +43,7 @@ endif
 VERSION = $(shell git name-rev --name-only --tags --no-undefined HEAD 2>/dev/null || echo git-`git rev-parse --short HEAD`)
 MOD_ID = $(shell cat user.config mod.config 2> /dev/null | awk -F= '/MOD_ID/ { print $$2; exit }')
 ENGINE_DIRECTORY = $(shell cat user.config mod.config 2> /dev/null | awk -F= '/ENGINE_DIRECTORY/ { print $$2; exit }')
-MOD_SEARCH_PATHS = "$(shell $(PYTHON) -c "import os; print(os.path.realpath('.'))")/mods,./mods"
+MOD_SEARCH_PATHS = "$(shell $(PYTHON) -c "import os; print(os.path.realpath('.'))")/mods,./$(ENGINE_DIRECTORY)/mods"
 
 MANIFEST_PATH = "mods/$(MOD_ID)/mod.yaml"
 HAS_LUAC = $(shell command -v luac 2> /dev/null)
@@ -56,12 +56,13 @@ DOTNET = dotnet
 RUNTIME ?= net6
 CONFIGURATION ?= Release
 DOTNET_RID = $(shell ${DOTNET} --info | grep RID: | cut -w -f3)
+ARCH_X64 = $(shell echo ${DOTNET_RID} | grep x64)
 
 ifndef TARGETPLATFORM
 UNAME_S := $(shell uname -s)
 UNAME_M := $(shell uname -m)
 ifeq ($(UNAME_S),Darwin)
-ifeq ($(RUNTIME)-$(DOTNET_RID),net6-osx-arm64)
+ifeq ($(ARCH_X64),)
 TARGETPLATFORM = osx-arm64
 else
 TARGETPLATFORM = osx-x64
@@ -188,6 +189,8 @@ else
 endif
 endif
 	@echo "Checking for explicit interface violations..."
+	@echo "$(ENGINE_DIRECTORY)"
+	@echo "$(MOD_SEARCH_PATHS)"
 	@./utility.sh --check-explicit-interfaces
 	@echo "Checking for incorrect conditional trait interface overrides..."
 	@./utility.sh --check-conditional-trait-interface-overrides
