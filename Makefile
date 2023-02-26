@@ -189,6 +189,8 @@ else
 endif
 endif
 	@echo "Checking for explicit interface violations..."
+	@echo "$(ENGINE_DIRECTORY)"
+	@echo "$(MOD_SEARCH_PATHS)"
 	@./utility.sh --check-explicit-interfaces
 	@echo "Checking for incorrect conditional trait interface overrides..."
 	@./utility.sh --check-conditional-trait-interface-overrides
