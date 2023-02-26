@@ -87,7 +87,7 @@ Assemblies:
 	^BinDir|OpenRA.Mods.Common.dll
 	^BinDir|OpenRA.Mods.Cnc.dll
 	^BinDir|OpenRA.Mods.D2k.dll
-	^BinDir|OpenRA.Mods.D2kSmugglers.dll
+	^BinDir|OpenRA.Mods.D2KSmugglers.dll
 
 ChromeLayout:
 	common|chrome/ingame.yaml
