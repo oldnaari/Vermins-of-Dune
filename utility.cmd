@@ -16,6 +16,32 @@ if not exist %ENGINE_DIRECTORY%\bin\OpenRA.exe goto noengine
 >nul find %ENGINE_VERSION% %ENGINE_DIRECTORY%\VERSION || goto noengine
 cd %ENGINE_DIRECTORY%
 
+set argC=0
+for %%x in (%*) do set /A argC+=1
+
+if %argC% == 0 goto choosemod
+
+if %argC% == 1 (
+    set MOD_ID=%1
+    goto loop
+)
+
+if %argC% GEQ 2 (
+    @REM This option is for use by other scripts so we don't want any extra output here - before or after.
+    call bin\OpenRA.Utility.exe %*
+    EXIT /B 0
+)
+
+:choosemod
+echo ----------------------------------------
+echo.
+call bin\OpenRA.Utility.exe
+echo Enter --exit to exit
+set /P mod="Please enter a modname: OpenRA.Utility.exe "
+if /I "%mod%" EQU "--exit" (exit /b)
+set MOD_ID=%mod%
+echo.
+
 :loop
 echo.
 echo ----------------------------------------
