@@ -1,17 +1,17 @@
 ^Cannon:
 	Warhead@1Dam: SpreadDamage
 		Versus:
-			scavanger: 8
+			scavenger: 8
 
 
 DevBullet:
 	Warhead@1Dam: SpreadDamage
 		Versus:
-			scavanger: 10
+			scavenger: 10
 
 
 155mm:
 	Warhead@1Dam: SpreadDamage
 		Versus:
-			scavanger: 2
+			scavenger: 2
 

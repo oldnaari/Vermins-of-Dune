@@ -17,14 +17,14 @@ combat_tank_s.husk:
 		Facings: -32
 		ZOffset: -512
 
-scavanger:
-	idle: scavanger-body.shp
+scavenger:
+	idle: scavenger-body.shp
 		Facings: -32
-	muzzle: scavanger-body-muzzle.shp
+	muzzle: scavenger-body-muzzle.shp
 		Tick: 100
 		Facings: -32
 		BlendMode: Additive
-	icon: s-scavanger-cameo.shp
+	icon: s-scavenger-cameo.shp
 
 shuttle:
 	idle: s-shuttle.shp

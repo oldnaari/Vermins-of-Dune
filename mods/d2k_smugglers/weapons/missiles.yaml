@@ -1,22 +1,22 @@
 ^Rocket:
 	Warhead@1Dam: SpreadDamage
 		Versus:
-			scavanger: 10
+			scavenger: 10
 
 
 ^Missile:
 	Warhead@1Dam: SpreadDamage
 		Versus:
-			scavanger: 10
+			scavenger: 10
 
 
 Rocket:
 	Warhead@1Dam: SpreadDamage
 		Versus:
-			scavanger: 5
+			scavenger: 5
 
 
 DeviatorMissile:
 	Warhead@1Dam: SpreadDamage
 		Versus:
-			scavanger: 10
+			scavenger: 10

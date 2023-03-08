@@ -2,7 +2,7 @@ Player:
 	UnitBuilderBotModule@omnius:
 		UnitsToBuild:
 			combat_tank_s.starport: 15
-			scavanger: 10
+			scavenger: 10
 			combat_tank_s: 100
 		UnitLimits:
 			harvester: 8
@@ -10,10 +10,10 @@ Player:
 	UnitBuilderBotModule@vidious:
 		UnitsToBuild:
 			combat_tank_s.starport: 15
-			scavanger: 40
+			scavenger: 40
 			combat_tank_s: 100
 	UnitBuilderBotModule@gladius:
 		UnitsToBuild:
 			combat_tank_s.starport: 15
-			scavanger: 10
+			scavenger: 10
 			combat_tank_s: 100

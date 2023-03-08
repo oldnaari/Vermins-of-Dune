@@ -12,7 +12,7 @@ DecomposeTarget:
 			light: 100
 			wood: 80
 			heavy: 60
-			scavanger: 3
+			scavenger: 3
 			invulnerable: 0
 			cy: 40
 			harvester: 50
@@ -49,58 +49,58 @@ DecomposeYield:
 Sound:
 	Warhead@1Dam: SpreadDamage
 		Versus:
-			scavanger: 6
+			scavenger: 6
 
 
 OrniBomb:
 	Warhead@1Dam: SpreadDamage
 		Versus:
-			scavanger: 6
+			scavenger: 6
 
 
 DeathHandCluster:
 	Warhead@1Dam: SpreadDamage
 		Versus:
-			scavanger: 6
+			scavenger: 6
 
 
 CrateExplosion:
 	Warhead@1Dam: SpreadDamage
 		Versus:
-			scavanger: 3
+			scavenger: 3
 
 
 grenade:
 	Warhead@1Dam: SpreadDamage
 		Versus:
-			scavanger: 2
+			scavenger: 2
 
 
 GrenDeath:
 	Warhead@1Dam: SpreadDamage
 		Versus:
-			scavanger: 2
+			scavenger: 2
 
 
 SardDeath:
 	Warhead@1Dam: SpreadDamage
 		Versus:
-			scavanger: 10
+			scavenger: 10
 
 
 SpiceExplosion:
 	Warhead@1Dam: SpreadDamage
 		Versus:
-			scavanger: 3
+			scavenger: 3
 
 
 BloomExplosion:
 	Warhead@1Dam: SpreadDamage
 		Versus:
-			scavanger: 3
+			scavenger: 3
 
 
 PlasmaExplosion:
 	Warhead@1Dam: SpreadDamage
 		Versus:
-			scavanger: 3
+			scavenger: 3

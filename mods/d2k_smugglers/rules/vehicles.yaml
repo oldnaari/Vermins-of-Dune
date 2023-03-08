@@ -1,7 +1,7 @@
 combat_tank_s:
 	Inherits: ^combat_tank
 	Encyclopedia:
-		Description: The Combat Tank is effective against most vehicles, less so against lightly armored vehicles.\n\nSmuggler Combat Tanks are less expensive, but they are more fragile 
+		Description: The Combat Tank is effective against most vehicles, less so against lightly armored vehicles.\n\nSmuggler Combat Tanks are less expensive, but they are more fragile
 		Order: 165
 		Category: Units
 	Tooltip:
@@ -22,7 +22,7 @@ combat_tank_s:
 		Actor: combat_tank_o.husk
 
 
-scavanger:
+scavenger:
 	Inherits: ^Tank
 	Inherits@GAINSEXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -34,15 +34,15 @@ scavanger:
 		BuildDurationModifier: 100
 		Description: Decomposes enemy units into resources
 	Encyclopedia:
-		Description: Scavanger provide resources while being on the battlefield \n\nTheir attack rays decompose enemy units into salvagable bits. \n\nThey are very resistant to bullets and high explosives, but vulnerable to missiles and high caliber guns.
+		Description: Scavengers provide resources while being on the battlefield \n\nTheir attack rays decompose enemy units into salvagable bits. Upon suction these bits are either converted to resources (if on full health) or are used to repair the scavenger if it is damaged. \n\nScavengers are very resistant to bullets and high explosives, but vulnerable to missiles and high caliber guns.
 		Order: 225
 		Category: Units
 	Armor:
-		Type: scavanger
+		Type: scavenger
 	Valued:
 		Cost: 800
 	Tooltip:
-		Name: Scavanger
+		Name: Scavenger
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Armament@damage:
@@ -61,7 +61,7 @@ scavanger:
 	Health:
 		HP: 800
 	Selectable:
-		Class: scavanger
+		Class: scavenger
 	RevealsShroud:
 		Range: 6c768
 	Explodes:
@@ -124,4 +124,3 @@ shuttle:
 	# 	UncloakOn: Attack, Unload, Infiltrate, Demolish, Dock, Damage, Heal
 	# 	IsPlayerPalette: true
 	# 	PauseOnCondition: cloak-force-disabled
-	
