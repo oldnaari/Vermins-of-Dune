@@ -41,7 +41,7 @@ silo.smugglers:
 	damaged-idle: s-silo-idle-damaged.shp
 		Offset: 1,1
 	stages: s-silo-idle.shp
-		Offset: 1,1 
+		Offset: 1,1
 		Length: 4
 	damaged-stages: s-silo-idle-damaged.shp
 		Offset: 1,1
@@ -209,12 +209,13 @@ outpost.smugglers:
 		Length: 10
 		Offset: -48,64
 		Tick: 100
+		ZOffset: 1024
 	damaged-idle: s-outpost-damaged.shp
 		Offset: 0,-6
 	idle-dish: s-outpost-radar.shp
-		Length: 12
-		Offset: 12,-4
-		Tick: 80
+		Length: 32
+		Offset: 12,-3
+		Tick: 30
 	bib: BLOXBASE.R8
 		Frames: 611, 612, 613, 631, 632, 633
 		Length: 6
@@ -224,7 +225,7 @@ outpost.smugglers:
 		Length: 6
 		Offset: -16,-16
 	icon: s-outpost-cameo.shp
-	
+
 
 heavy.smugglers:
 	idle: s-heavy-idle.shp
