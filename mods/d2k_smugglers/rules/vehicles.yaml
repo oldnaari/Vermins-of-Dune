@@ -82,7 +82,7 @@ shuttle:
 		BuildDurationModifier: 100
 		Description: Transport unit
 	Encyclopedia:
-		Description: Shuttles are transport units, disquised under Arakeen transport.
+		Description: Shuttles are transport units, disguised under Arakeen transport. When the shuttle is destroyed it drops the infantry units it contains.\n\nIt can run over infantry units, despite being produced from the light factory
 		Order: 125
 		Category: Units
 	Valued:
