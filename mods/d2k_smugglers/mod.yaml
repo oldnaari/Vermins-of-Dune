@@ -26,7 +26,7 @@ Packages:
 
 MapFolders:
 	d2k_smugglers|maps: System
-	~^SupportDir|maps/d2k/{DEV_VERSION}: User
+	~^SupportDir|maps/d2k_smugglers/1.0.0: User
 
 RequiresMods:
 	d2k: release-20230225
@@ -286,7 +286,7 @@ GameSpeeds:
 			OrderLatency: 6
 
 ModContent:
-	InstallPromptMessage: Vermins of DUne requires artwork and audio from the \noriginal game and mod specific content \n\nQuick Install will automatically download this content (without\nmusic or videos) from an online mirror of the game files.\n\nAdvanced Install includes options for copying the music, videos,\nand other content from an original game disc.
+	InstallPromptMessage: Vermins of Dune requires artwork and audio from the \noriginal game and mod specific content \n\nQuick Install will automatically download this content (without\nmusic or videos) from an online mirror of the game files.\n\nAdvanced Install includes options for copying the music, videos,\nand other content from an original game disc.
 	HeaderMessage: The original game content may be copied from an original game disc,\nor downloaded from an online mirror of the game files.
 	QuickDownload: smugglerfiles
 	Packages:
@@ -295,7 +295,7 @@ ModContent:
 			Sources: d2k-a, d2k-a-linux, d2k-b, d2k-b-linux, d2k-c, d2k-c-linux, d2k-d, d2k-d-linux, d2k-e, d2k-e-linux, gruntmods
 			Required: true
 			Download: basefiles
-		smuggler: Smuggler Addon Content
+		smuggler: Smuggler Audio Content
 			TestFiles: ^SupportDir|Content/d2k_smugglers/GAMESFX/ATK_SCAVANGER.WAV
 			Required: true
 			Download: smugglerfiles
