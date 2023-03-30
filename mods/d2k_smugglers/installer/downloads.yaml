@@ -1,9 +1,9 @@
 smugglerfiles: Smugglers Addon Content
-	SHA1: b10ff7902874bada6616e468f9817551ac170303
+	SHA1: 23b5d5a9e03a79bb4664f2bdccb0bd02337b43c3
 	MirrorList: https://raw.githubusercontent.com/oldnaari/Vermins-of-Dune-Mirrors/main/mirrorlist-1.0.0.txt
 	Extract:
         # Vermins Of Dune Addon Files
-        ^SupportDir|Content/d2k_smugglers/v2/GAMESFX/ATK_SCAVENGER.WAV: d2k_smugglers/GAMESFX/ATK_SCAVANGER.WAV
+        ^SupportDir|Content/d2k_smugglers/v2/GAMESFX/ATK_SCAVENGER.WAV: d2k_smugglers/GAMESFX/ATK_SCAVENGER.WAV
         ^SupportDir|Content/d2k_smugglers/v2/GAMESFX/SI_1MIN.WAV: d2k_smugglers/GAMESFX/SI_1MIN.WAV
         ^SupportDir|Content/d2k_smugglers/v2/GAMESFX/SI_2MIN.WAV: d2k_smugglers/GAMESFX/SI_2MIN.WAV
         ^SupportDir|Content/d2k_smugglers/v2/GAMESFX/SI_3MIN.WAV: d2k_smugglers/GAMESFX/SI_3MIN.WAV
