@@ -1,7 +1,7 @@
 Metadata:
 	Title: Dune 2000 (Smugglers)
 	WebIcon32: https://www.openra.net/images/icons/d2k_32x32.png
-	Version: 1.0.0
+	Version: 1.beta.1
 
 PackageFormats: D2kSoundResources
 
@@ -9,7 +9,7 @@ Packages:
 	~^SupportDir|Content/d2k/v2/
 	~^SupportDir|Content/d2k/v2/GAMESFX
 	~^SupportDir|Content/d2k/v2/Movies
-	~^SupportDir|Content/d2k_smugglers/GAMESFX
+	~^SupportDir|Content/d2k_smugglers/v2/GAMESFX
 	~^SupportDir|Content/d2k/v2/Music
 	^EngineDir
 	$d2k: d2k
@@ -296,7 +296,7 @@ ModContent:
 			Required: true
 			Download: basefiles
 		smuggler: Smuggler Audio Content
-			TestFiles: ^SupportDir|Content/d2k_smugglers/GAMESFX/ATK_SCAVANGER.WAV
+			TestFiles: ^SupportDir|Content/d2k_smugglers/v2/GAMESFX/ATK_SCAVENGER.WAV
 			Required: true
 			Download: smugglerfiles
 		patch: 1.06 Patch Content
