@@ -13,12 +13,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Activities;
+using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Activities;
+using OpenRA.Mods.Common.Traits;
 using OpenRA.Mods.Common.Traits.Render;
 using OpenRA.Primitives;
 using OpenRA.Traits;
 
-namespace OpenRA.Mods.Common.Traits
+namespace OpenRA.Mods.D2KSmugglers.Traits
 {
 	public class FlyVultureInfo : AttackBaseInfo
 	{
@@ -38,6 +40,7 @@ namespace OpenRA.Mods.Common.Traits
 	public class OperationVulture : ISync
 	{
 		public WDist OperationAreaRadius;
+		public static readonly WDist PickUpDistance = new WDist(1024);
 
 		public List<Actor> Vultures = null;
 
@@ -110,6 +113,13 @@ namespace OpenRA.Mods.Common.Traits
 			LoopPeriodInTicks = 1024 / aircraft.TurnSpeed.Angle;
 			VultureOffset = aircraft.Speed * LoopPeriodInTicks * (SquadSize + 1) / SquadSize;
 			LoopRadius = aircraft.Speed * LoopPeriodInTicks * 100 / 628;
+		}
+
+		public static int ComputeRadiusForUnitType(Ruleset rules, string unitType)
+		{
+			var aircraft = rules.Actors[unitType].TraitInfo<AircraftInfo>();
+			var loopPeriodInTicks = 1024 / aircraft.TurnSpeed.Angle;
+			return aircraft.Speed * loopPeriodInTicks * 100 / 628;
 		}
 
 		public void SendVultures(
@@ -236,7 +246,7 @@ namespace OpenRA.Mods.Common.Traits
 
 		void HarvestTick(Actor self)
 		{
-			var pickUpDistance = 1024;
+			var pickUpDistance = OperationVulture.PickUpDistance.Length;
 
 			var carryallTrait = self.Trait<Carryall>();
 

@@ -12,12 +12,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Graphics;
 using OpenRA.Mods.Common.Activities;
 using OpenRA.Mods.Common.Effects;
+using OpenRA.Mods.Common.Traits;
+using OpenRA.Mods.D2KSmugglers.Graphics;
 using OpenRA.Primitives;
 using OpenRA.Traits;
 
-namespace OpenRA.Mods.Common.Traits
+namespace OpenRA.Mods.D2KSmugglers.Traits
 {
 	public class VulturePowerInfo : SupportPowerInfo
 	{
@@ -190,6 +193,10 @@ namespace OpenRA.Mods.Common.Traits
 	{
 		protected Player player;
 
+		protected WPos position;
+
+		protected string vultureUnitType;
+
 		public SelectVulturePowerTarget(
 			string order,
 			SupportPowerManager manager,
@@ -199,6 +206,7 @@ namespace OpenRA.Mods.Common.Traits
 			: base(order, manager, info.Cursor, button)
 		{
 			this.player = player;
+			vultureUnitType = info.UnitType;
 		}
 
 		public override IEnumerable<Order> Order(World world, CPos cell, int2 worldPixel, MouseInput mi)
@@ -211,9 +219,35 @@ namespace OpenRA.Mods.Common.Traits
 			return Enumerable.Empty<Order>();
 		}
 
+		protected bool IsValidCell(CPos cell)
+		{
+			return player.Shroud.IsVisible(cell);
+		}
+
 		protected override string GetCursor(World world, CPos cell, int2 worldPixel, MouseInput mi)
 		{
-			return player.Shroud.IsVisible(cell) ? base.GetCursor(world, cell, worldPixel, mi) : "generic-blocked";
+			position = world.Map.CenterOfCell(cell);
+			return IsValidCell(cell) ? base.GetCursor(world, cell, worldPixel, mi) : "generic-blocked";
+		}
+
+		protected override IEnumerable<IRenderable> RenderAnnotations(WorldRenderer wr, World world)
+		{
+			foreach (var item in base.RenderAnnotations(wr, world))
+			{
+				yield return item;
+			}
+
+			var (_, h, s, _) = player.Color.ToAhsv();
+			var remap = new PlayerColorRemap(Enumerable.Range(0, 1).ToArray(), h, s);
+
+			// var heavyColor = remap.GetRemappedColor(Color.Gray, 0);
+			// var lightColor = remap.GetRemappedColor(Color.DarkGray, 0);
+			// var heavyColor = Color.FromArgb(101, 68, 51);
+			var heavyColor = Color.FromArgb(0, 0, 0);
+			var lightColor = Color.FromArgb(130, 101, 82);
+
+			if (IsValidCell(world.Map.CellContaining(position)))
+				yield return new OperationVultureTargetRegion(position, 2, lightColor, heavyColor, heavyColor);
 		}
 	}
 }
