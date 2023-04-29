@@ -13,7 +13,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using OpenRA;
 using OpenRA.Graphics;
 using OpenRA.Primitives;
 
@@ -135,7 +134,7 @@ namespace OpenRA.Mods.D2KSmugglers.Graphics
 				(2.25, 5.00),
 			};
 
-			IEnumerable<(double, double)>[] contours = {lineAxes, subLine, subLine2, lineDiag, segments1, segments2};
+			IEnumerable<(double, double)>[] contours = { lineAxes, subLine, subLine2, lineDiag, segments1, segments2 };
 			foreach (var contour in contours)
 			{
 				var c = contour;

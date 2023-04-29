@@ -237,12 +237,6 @@ namespace OpenRA.Mods.D2KSmugglers.Traits
 				yield return item;
 			}
 
-			var (_, h, s, _) = player.Color.ToAhsv();
-			var remap = new PlayerColorRemap(Enumerable.Range(0, 1).ToArray(), h, s);
-
-			// var heavyColor = remap.GetRemappedColor(Color.Gray, 0);
-			// var lightColor = remap.GetRemappedColor(Color.DarkGray, 0);
-			// var heavyColor = Color.FromArgb(101, 68, 51);
 			var heavyColor = Color.FromArgb(0, 0, 0);
 			var lightColor = Color.FromArgb(130, 101, 82);
 
