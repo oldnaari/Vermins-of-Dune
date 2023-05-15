@@ -2,7 +2,7 @@ DecomposeTarget:
 	ReloadDelay: 16
 	Range: 6c0
 	# Report: MGUN2.WAV
-	Report: ATK_SCAVANGER.WAV
+	Report: ATK_SCAVENGER.WAV
 	Projectile: InstantHit
 	Warhead@1Dam: SalvageTarget
 		Damage: 2000
