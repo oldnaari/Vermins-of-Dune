@@ -227,7 +227,9 @@ namespace OpenRA.Mods.D2KSmugglers.Traits
 		protected override string GetCursor(World world, CPos cell, int2 worldPixel, MouseInput mi)
 		{
 			position = world.Map.CenterOfCell(cell);
-			return IsValidCell(cell) ? base.GetCursor(world, cell, worldPixel, mi) : "generic-blocked";
+
+			// return IsValidCell(cell) ? base.GetCursor(world, cell, worldPixel, mi) : "generic-blocked";
+			return IsValidCell(cell) ? "default" : "generic-blocked";
 		}
 
 		protected override IEnumerable<IRenderable> RenderAnnotations(WorldRenderer wr, World world)
