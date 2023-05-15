@@ -161,10 +161,46 @@ namespace OpenRA.Mods.D2KSmugglers.Graphics
 			}
 		}
 
+		void DrawMembrane(WorldRenderer wr)
+		{
+			var diameter = 6.5;
+			var tangent = 4.5;
+
+			var positionsRaw = new (double, double)[]
+			{
+				(diameter, -tangent),
+				(diameter, tangent),
+				(tangent, diameter),
+				(-tangent, diameter),
+				(-diameter, tangent),
+				(-diameter, -tangent),
+				(-tangent, -diameter),
+				(tangent, -diameter),
+			};
+
+			var sr = Game.Renderer.SpriteRenderer;
+
+			var colorPolygon = Color.FromArgb(32, 64, 32, 16);
+
+			var vertices = positionsRaw.Select(x =>
+				wr.Viewport.WorldToViewPx(
+					wr.ScreenPosition(
+						centerPosition + new WVec((int)(x.Item1 * 1024), (int)(x.Item2 * 1024), 0))));
+
+			var vertexArray = vertices.Select(x => new float3((float)x.X, (float)x.Y, 0.0f)).Cast<float3>().ToArray();
+
+			foreach (var i in Enumerable.Range(2, vertexArray.Length))
+			{
+				Game.Renderer.RgbaColorRenderer.FillTriangle(vertexArray[0],
+					vertexArray[(i - 1) % 8], vertexArray[i % 8], colorPolygon);
+			}
+		}
+
 		public void Render(WorldRenderer wr)
 		{
 			var cr = Game.Renderer.RgbaColorRenderer;
 
+			DrawMembrane(wr);
 			foreach (var contour in GetBracers())
 			{
 				foreach ((var posStart, var posEnd) in IterSegments(contour))
