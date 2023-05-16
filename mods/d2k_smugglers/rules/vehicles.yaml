@@ -59,7 +59,7 @@ scavenger:
 		Speed: 32
 		TurnSpeed: 12
 	Health:
-		HP: 800
+		HP: 500
 	Selectable:
 		Class: scavenger
 	RevealsShroud:
@@ -94,7 +94,7 @@ shuttle:
 	Selectable:
 		Class: shuttle
 	Health:
-		HP: 9000
+		HP: 3000
 	Armor:
 		Type: wood
 	Mobile:
@@ -106,6 +106,7 @@ shuttle:
 		Types: Infantry
 		MaxWeight: 3
 		LoadingCondition: notmobile
+		EjectOnDeath: true
 	RevealsShroud:
 		Range: 4c768
 	Explodes:
