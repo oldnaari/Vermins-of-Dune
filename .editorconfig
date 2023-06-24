@@ -8,11 +8,12 @@ end_of_line = LF
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-; 4-column tab indentation and .NET coding conventions
-[*.cs]
+; 4-column tab indentation
+[*.{cs,csproj,yaml,lua,sh,ps1}]
 indent_style = tab
 indent_size = 4
 
+; .NET coding conventions
 dotnet_separate_import_directive_groups = false
 dotnet_sort_system_directives_first = true
 
