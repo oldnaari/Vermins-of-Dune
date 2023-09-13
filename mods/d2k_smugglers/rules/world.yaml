@@ -19,7 +19,7 @@
 	Faction@Smugglers:
 		Name: Smugglers
 		InternalName: smuggler
-		Description: Smugglers\nThe opportunist smugglers, that have their net spread accross the entire habitable universe.\nTheir main source of wealth is the corruption in the major Houses. \nThey use cheep hastly prepared tech for their operations and their Vulture squad can capture \nand deliver any vehicle within seconds\n\nFaction Variations: \n    - Trikes are replaced by Raider Trikes\n    - Combat Tanks are cheaper, faster but less durable\n\nSpecial Units:\n    - Raider Trike\n    - Stealth Raider Trike\n    - Scarab\n    - Operation Valture
+		Description: Smugglers\nThe opportunist smugglers, that have their net spread accross the entire habitable universe.\nTheir main source of wealth is the corruption in the major Houses. \nThey use cheep hastly prepared tech for their operations and their Vulture squad can capture \nand deliver any vehicle within seconds\n\nFaction Variations: \n    - Trikes are replaced by Raider Trikes\n    - Combat Tanks are cheaper, faster but less durable\n\nSpecial Units:\n    - Raider Trike\n    - Shuttle\n    - Scavenger\n    - Operation Valture
 		Selectable: true
 	Faction@Corrino:
 		Name: Corrino
