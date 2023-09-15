@@ -16,7 +16,7 @@ civilian:
 		VoiceSet: EngineerVoice
 	-AttackFrontal:
 
-	
+
 thumper:
 	Buildable:
 		Prerequisites: upgrade.barracks
@@ -24,3 +24,9 @@ thumper:
 engineer:
 	Passenger:
 		Weight: 2
+
+
+fremen:
+	PassiveRegeneration:
+		Amount: 5
+
