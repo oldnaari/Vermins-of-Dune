@@ -1,10 +1,10 @@
-carryall.reinforce:
-	Cargo:
-		MaxWeight: 20
-		# UnloadOnGround: True
-		# LoadRange: 0
-	Aircraft:
-		LandAltitude: 512
+#carryall.reinforce:
+#	Cargo:
+#		MaxWeight: 20
+#		# UnloadOnGround: True
+#		# LoadRange: 0
+#	Aircraft:
+#		LandAltitude: 512
 
 
 vulture:
