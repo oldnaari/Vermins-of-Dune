@@ -1,32 +1,43 @@
 combat_tank_s:
-	idle: s-combat-tank-idle.shp
-		Facings: -32
-	turret: s-combat-tank-turret.shp
-		Facings: -32
-	muzzle: DATA.R8
-		Start: 4028
-		Tick: 60
-		Facings: -32
-		BlendMode: Additive
-	icon: s-combat-tank-cameo.shp
+	idle:
+        Filename:  s-combat-tank-idle.shp
+        Facings: -32
+	turret:
+        Filename: s-combat-tank-turret.shp
+        Facings: -32
+	muzzle:
+        Filename: DATA.R8
+        Start: 4028
+        Tick: 60
+        Facings: -32
+        BlendMode: Additive
+	icon:
+        Filename: s-combat-tank-cameo.shp
 
 combat_tank_s.husk:
-	idle: s-combat-tank-idle.shp
-		Facings: -32
-	turret: s-combat-tank-turret.shp
-		Facings: -32
-		ZOffset: -512
+	idle:
+        Filename: s-combat-tank-idle.shp
+        Facings: -32
+	turret:
+        Filename: s-combat-tank-turret.shp
+        Facings: -32
+        ZOffset: -512
 
 scavenger:
-	idle: scavenger-body.shp
-		Facings: -32
-	muzzle: scavenger-body-muzzle.shp
-		Tick: 100
-		Facings: -32
-		BlendMode: Additive
-	icon: s-scavenger-cameo.shp
+	idle:
+        Filename: scavenger-body.shp
+        Facings: -32
+	muzzle:
+        Filename: scavenger-body-muzzle.shp
+        Tick: 100
+        Facings: -32
+        BlendMode: Additive
+	icon:
+        Filename: s-scavenger-cameo.shp
 
 shuttle:
-	idle: s-shuttle.shp
-		Facings: -32
-	icon: s-shuttle-cameo.shp
+	idle:
+        Filename: s-shuttle.shp
+        Facings: -32
+	icon:
+        Filename: s-shuttle-cameo.shp

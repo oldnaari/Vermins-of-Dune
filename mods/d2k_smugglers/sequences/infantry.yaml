@@ -1,124 +1,152 @@
 civilian:
-	stand: civilian-idle.shp
-		Offset: 4, -5
-		Facings: -8
-		Transpose: true
-	idle1: civilian-idle1.shp
-		Offset: 4, -5
-		Length: 8
-		Tick: 80
-	idle2: civilian-idle2.shp
-		Offset: 4, -5
-		Length: 8
-		Tick: 80
-	run: civilian-run.shp
-		Offset: 4, -5
-		Length: 6
-		Facings: -8
-		Transpose: true
-		Tick: 120
-	standup: civilian-idle.shp
-		Offset: 4, -5
-		Facings: -8
-		Transpose: true
-		Tick: 120
-	prone-stand: civilian-prone-stand.shp
-		Facings: -8
-		Transpose: true
-	prone-run: civilian-prone-run.shp
-		Length: 3
-		Facings: -8
-		Transpose: true
-		Tick: 120
-	die1: civilian-die1.shp
-		Offset: -3, -3
-		Length: 12
-		Tick: 80
-	die2: civilian-die2.shp
-		Offset: 0, -3
-		Length: 8
-		Tick: 80
-	die3: civilian-die3.shp
-		Offset: 0, -3
-		Length: 8
-		Tick: 80
-	die4: civilian-die4.shp
-		Length: 8
-		Tick: 80
-	die-crushed: civilian-crushed.shp
-		Length: 8
-		Tick: 800
-		ZOffset: -511
-	icon: DATA.R8
-		Start: 4274
-		Offset: -30,-24
+	stand:
+        Filename: civilian-idle.shp
+        Offset: 4, -5
+        Facings: -8
+        Transpose: true
+	idle1:
+        Filename: civilian-idle1.shp
+        Offset: 4, -5
+        Length: 8
+        Tick: 80
+	idle2:
+        Filename: civilian-idle2.shp
+        Offset: 4, -5
+        Length: 8
+        Tick: 80
+	run:
+        Filename: civilian-run.shp
+        Offset: 4, -5
+        Length: 6
+        Facings: -8
+        Transpose: true
+        Tick: 120
+	standup:
+        Filename: civilian-idle.shp
+        Offset: 4, -5
+        Facings: -8
+        Transpose: true
+        Tick: 120
+	prone-stand:
+        Filename: civilian-prone-stand.shp
+        Facings: -8
+        Transpose: true
+	prone-run:
+        Filename: civilian-prone-run.shp
+        Length: 3
+        Facings: -8
+        Transpose: true
+        Tick: 120
+	die1:
+        Filename: civilian-die1.shp
+        Offset: -3, -3
+        Length: 12
+        Tick: 80
+	die2:
+        Filename: civilian-die2.shp
+        Offset: 0, -3
+        Length: 8
+        Tick: 80
+	die3:
+        Filename: civilian-die3.shp
+        Offset: 0, -3
+        Length: 8
+        Tick: 80
+	die4:
+        Filename: civilian-die4.shp
+        Length: 8
+        Tick: 80
+	die-crushed:
+        Filename: civilian-crushed.shp
+        Length: 8
+        Tick: 800
+        ZOffset: -511
+	icon:
+        Filename: DATA.R8
+        Start: 4274
+        Offset: -30,-24
 
 
 inquisitor:
-    stand: inquisitor.shp
+    stand:
+        Filename: inquisitor.shp
         Facings: -8
         Transpose: true
         Offset: 4,-5
     # change me \/
-    idle1: inquisitor-idle1.shp
+    idle1:
+        Filename: inquisitor-idle1.shp
         Length: 8
         Tick: 80
         Offset: 4,-5
-    idle2: inquisitor-idle2.shp
+    idle2:
+        Filename: inquisitor-idle2.shp
         Length: 8
         Tick: 80
         Offset: 4,-5
-    run: inquisitor-run.shp
+    run:
+        Filename: inquisitor-run.shp
         Length: 6
         Facings: -8
         Tick: 120
         Offset: 4,-5
-    shoot: DATA.R8
-        Start: 978
+    shoot:
+        Filename: inquisitor-shoot.shp
         Length: 6
         Facings: -8
-        Transpose: true
-    prone-stand: DATA.R8
+        Tick: 120
+        Offset: 4,-5
+    prone-stand:
+        Filename: DATA.R8
         Start: 1034
         Facings: -8
         Transpose: true
-    prone-run: DATA.R8
+    prone-run:
+        Filename: DATA.R8
         Start: 1042
         Length: 3
         Facings: -8
         Transpose: true
         Tick: 120
-    standup: DATA.R8
+    standup:
+        Filename: DATA.R8
         Start: 1026
         Facings: -8
         Transpose: true
         Tick: 120
-    prone-shoot: DATA.R8
+    prone-shoot:
+        Filename: DATA.R8
         Start: 1058
         Length: 6
         Facings: -8
         Transpose: true
-    die1: DATA.R8
+    die1:
+        Filename: DATA.R8
         Frames: 1106, 1113, 1120, 1127, 1134, 1141, 1148, 1155, 1162, 1163, 1164, 1165
         Length: 12
         Tick: 80
-    die2: DATA.R8
+    die2:
+        Filename: DATA.R8
         Frames: 1107, 1114, 1121, 1128, 1135, 1142, 1149, 1156
         Length: 8
         Tick: 80
-    die3: DATA.R8
+    die3:
+        Filename: DATA.R8
         Frames: 1108, 1115, 1122, 1129, 1136, 1143, 1150, 1157
         Length: 8
         Tick: 80
-    die4: DATA.R8
+    die4:
+        Filename: DATA.R8
         Frames: 1109, 1116, 1123, 1130, 1137, 1144, 1151, 1158
         Length: 8
         Tick: 80
-    die-crushed: DATA.R8
+    die-crushed:
+        Filename:  DATA.R8
         Frames: 1110, 1117, 1124, 1131, 1138, 1145, 1152, 1159
         Length: 8
         Tick: 800
         ZOffset: -511
-    icon: DATA.R8
+    icon:
+        Filename: DATA.R8
         Start: 4276
         Offset: -30,-24

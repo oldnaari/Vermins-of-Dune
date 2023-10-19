@@ -1,4 +1,5 @@
 smugglerfiles: Smugglers Addon Content
+    Type: ZipFile
 	SHA1: 23b5d5a9e03a79bb4664f2bdccb0bd02337b43c3
 	MirrorList: https://raw.githubusercontent.com/oldnaari/Vermins-of-Dune-Mirrors/main/mirrorlist-1.0.0.txt
 	Extract:

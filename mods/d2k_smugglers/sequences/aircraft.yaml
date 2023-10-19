@@ -1,6 +1,8 @@
 vulture:
-	idle: vulture-idle.shp
-		Facings: -32
-	icon: DATA.R8
-		Start: 4290
-		Offset: -30,-24
+	idle:
+        Filename: vulture-idle.shp
+        Facings: -32
+	icon:
+        Filename: DATA.R8
+        Start: 4290
+        Offset: -30,-24
