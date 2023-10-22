@@ -1,4 +1,4 @@
-MapFormat: 11
+MapFormat: 12
 
 RequiresMod: d2k_smugglers
 
@@ -42,7 +42,7 @@ Players:
 		LockFaction: True
 		Faction: harkonnen
 		LockColor: True
-		Color: FE0000
+		Color: D64A42
 		Allies: Smugglers
 		Enemies: Ordos, Creeps
 		Bot: campaign
@@ -51,7 +51,7 @@ Players:
 		LockFaction: True
 		Faction: smuggler
 		LockColor: True
-		Color: 542209
+		Color: 7B2910
 		Allies: Harkonnen
 		Enemies: Ordos, Creeps
 		Bot: campaign
@@ -518,3 +518,5 @@ Actors:
 		Location: 49,19
 
 Rules: d2k|rules/campaign-rules.yaml, d2k|rules/campaign-tooltips.yaml, d2k|rules/campaign-palettes.yaml, rules.yaml
+
+Translations: d2k|languages/lua/en.ftl, d2k|languages/difficulties/en.ftl
