@@ -1,6 +1,6 @@
 MapFormat: 12
 
-RequiresMod: d2k
+RequiresMod: d2k_smugglers
 
 Title: Ordos 05
 
@@ -39,40 +39,40 @@ Players:
 		Enemies: AtreidesMainBase, AtreidesSmallBase1, AtreidesSmallBase2, AtreidesSmallBase3, Creeps
 	PlayerReference@AtreidesMainBase:
 		Name: AtreidesMainBase
+		Bot: campaign
 		LockFaction: True
 		Faction: atreides
 		LockColor: True
 		Color: 5A7394
 		Allies: AtreidesSmallBase1, AtreidesSmallBase2
 		Enemies: Ordos, Creeps
-		Bot: campaign
 	PlayerReference@AtreidesSmallBase1:
 		Name: AtreidesSmallBase1
+		Bot: campaign
 		LockFaction: True
 		Faction: atreides
 		LockColor: True
 		Color: 5A7394
 		Allies: AtreidesMainBase, AtreidesSmallBase2, AtreidesSmallBase3
 		Enemies: Ordos, Creeps
-		Bot: campaign
 	PlayerReference@AtreidesSmallBase2:
 		Name: AtreidesSmallBase2
+		Bot: campaign
 		LockFaction: True
 		Faction: atreides
 		LockColor: True
 		Color: 5A7394
 		Allies: AtreidesMainBase, AtreidesSmallBase1, AtreidesSmallBase3
 		Enemies: Ordos, Creeps
-		Bot: campaign
 	PlayerReference@AtreidesSmallBase3:
 		Name: AtreidesSmallBase3
+		Bot: campaign
 		LockFaction: True
 		Faction: atreides
 		LockColor: True
 		Color: 5A7394
 		Allies: AtreidesMainBase, AtreidesSmallBase1, AtreidesSmallBase2
 		Enemies: Ordos, Creeps
-		Bot: campaign
 
 Actors:
 	Actor0: wall
@@ -316,9 +316,6 @@ Actors:
 	Actor76: wall
 		Location: 39,51
 		Owner: AtreidesSmallBase2
-	ABarracks3: barracks
-		Location: 42,51
-		Owner: AtreidesSmallBase2
 	Actor78: wall
 		Location: 45,51
 		Owner: AtreidesSmallBase2
@@ -341,6 +338,24 @@ Actors:
 	Actor84: wall
 		Location: 38,54
 		Owner: AtreidesSmallBase2
+	AMonument: culture.atreides
+		Location: 42,51
+		Owner: AtreidesSmallBase2
+	Actor161: grenadier
+		Owner: AtreidesSmallBase2
+		Facing: 384
+		Location: 42,53
+		SubCell: 3
+	Actor162: grenadier
+		Owner: AtreidesSmallBase2
+		Facing: 384
+		SubCell: 3
+		Location: 44,52
+	Actor163: grenadier
+		Owner: AtreidesSmallBase2
+		Facing: 384
+		SubCell: 3
+		Location: 40,52
 	APower6: wind_trap
 		Location: 40,54
 		Owner: AtreidesSmallBase2
@@ -570,6 +585,10 @@ Actors:
 	AtreidesEntry8: waypoint
 		Owner: Neutral
 		Location: 2,58
+	AtreidesEntry3: waypoint
+		Faction: Random
+		Location: 2,53
+		Owner: AtreidesSmallBase3
 
 Rules: d2k|rules/campaign-rules.yaml, d2k|rules/campaign-tooltips.yaml, d2k|rules/campaign-palettes.yaml, rules.yaml
 

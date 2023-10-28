@@ -11,7 +11,7 @@ Base =
 {
 	AtreidesMainBase = { AConyard, APower1, APower2, APower3, ABarracks1, ARefinery1, ALightFactory, AHeavyFactory, AGunt1, AGunt2, AGunt3, AGunt4, AGunt5 },
 	AtreidesSmallBase1 = { APower4, APower5, ABarracks2, ARefinery2, AGunt6, AGunt7 },
-	AtreidesSmallBase2 = { APower6, APower7, ABarracks3, AGunt8, AGunt9, AGunt10 },
+	AtreidesSmallBase2 = { APower6, APower7, AMonument, AGunt8, AGunt9, AGunt10 },
 	AtreidesSmallBase3 = { APower8, APower9, AStarport, AGunt11, AGunt12 }
 }
 
@@ -81,7 +81,43 @@ InitialReinforcementsPaths =
 {
 	AtreidesMainBase = { AtreidesEntry1.Location, AtreidesRally1.Location },
 	AtreidesSmallBase1 = { ABarracks2.Location, AtreidesRally2.Location },
-	AtreidesSmallBase2 = { ABarracks3.Location, AtreidesRally3.Location }
+	AtreidesSmallBase2 = { AMonument.Location, AtreidesRally3.Location }
+}
+
+AtreidesPilgrimReinforcements = {
+	easy =
+	{
+		{ "grenadier", "light_inf", "light_inf" },
+		{ "grenadier", "trooper", "light_inf" },
+		{ "grenadier", "light_inf", "trooper" },
+		{ "grenadier", "light_inf", "light_inf" },
+		{ "grenadier", "trooper", "light_inf" },
+		{ "grenadier", "light_inf", "trooper" },
+		{ "grenadier", "light_inf", "light_inf" },
+		{ "grenadier", "light_inf", "light_inf" },
+	},
+	normal =
+	{
+		{ "grenadier", "grenadier", "light_inf" },
+		{ "grenadier", "grenadier", "light_inf" },
+		{ "grenadier", "grenadier", "trooper" },
+		{ "grenadier", "grenadier", "light_inf" },
+		{ "grenadier", "grenadier", "trooper" },
+		{ "grenadier", "grenadier", "trooper" },
+		{ "grenadier", "grenadier", "light_inf" },
+		{ "grenadier", "grenadier", "trooper" },
+    },
+	hard =
+	{
+		{ "grenadier", "grenadier", "light_inf", "light_inf" },
+		{ "grenadier", "grenadier", "light_inf", "light_inf" },
+		{ "grenadier", "grenadier", "light_inf", "trooper" },
+		{ "grenadier", "grenadier", "light_inf", "light_inf" },
+		{ "grenadier", "grenadier", "light_inf", "grenadier" },
+		{ "grenadier", "grenadier", "light_inf", "trooper" },
+		{ "grenadier", "grenadier", "light_inf", "trooper" },
+		{ "grenadier", "grenadier", "light_inf", "grenadier" },
+    }
 }
 
 ToHarvest =
@@ -96,6 +132,8 @@ Hunt = function(house)
 		Utils.Do(house.GetGroundAttackers(), IdleHunt)
 	end)
 end
+
+MonumentReinforcementsOn = false
 
 CheckHarvester = function(house)
 	if DateTime.GameTime % DateTime.Seconds(10) == 0 and LastHarvesterEaten[house] then
@@ -184,13 +222,30 @@ WorldLoaded = function()
 		unit.AttackMove(AtreidesAttackLocation)
 		IdleHunt(unit)
 	end
-	SendCarryallReinforcements(AtreidesMain, 0, 8, AtreidesAttackDelay[Difficulty], path, AtreidesReinforcements[Difficulty], waveCondition, huntFunction)
+	SendCarryallReinforcements(AtreidesMain, 0, 8,
+							   AtreidesAttackDelay[Difficulty],
+							   path,
+							   AtreidesReinforcements[Difficulty],
+							   waveCondition,
+							   huntFunction)
+
+	local pathPilgrims = function() return {AtreidesEntry3.Location, AtreidesRally3.Location} end
+	local waveConditionPilgrims = function() return MonumentReinforcementsOn end
+	local huntFunctionPilgrims = function(unit)
+		unit.AttackMove(AtreidesAttackLocation)
+		IdleHunt(unit)
+	end
+	SendCarryallReinforcements(AtreidesMain, 0, 8,
+							   AtreidesAttackDelay[Difficulty],
+							   pathPilgrims,
+							   AtreidesPilgrimReinforcements[Difficulty],
+							   waveConditionPilgrims,
+							   huntFunctionPilgrims)
 
 	Actor.Create("upgrade.barracks", true, { Owner = AtreidesMain })
 	Actor.Create("upgrade.light", true, { Owner = AtreidesMain })
 	Actor.Create("upgrade.heavy", true, { Owner = AtreidesMain })
 	Actor.Create("upgrade.barracks", true, { Owner = AtreidesSmall1 })
-	Actor.Create("upgrade.barracks", true, { Owner = AtreidesSmall2 })
 	Trigger.AfterDelay(0, ActivateAI)
 
 	Trigger.OnKilled(AStarport, function()
@@ -224,5 +279,8 @@ WorldLoaded = function()
 		if not AIProductionActivated then
 			ActivateAIProduction()
 		end
+	end)
+	Trigger.OnKilledOrCaptured(AMonument, function()
+		MonumentReinforcementsOn = true
 	end)
 end

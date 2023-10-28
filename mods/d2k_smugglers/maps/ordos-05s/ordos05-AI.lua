@@ -49,7 +49,7 @@ ActivateAIProduction = function()
 
 	ProduceUnits(AtreidesSmall1, ABarracks2, delay, infantryToBuild, AttackGroupSize[Difficulty], attackTresholdSize)
 
-	ProduceUnits(AtreidesSmall2, ABarracks3, delay, infantryToBuild, AttackGroupSize[Difficulty], attackTresholdSize)
+-- 	ProduceUnits(AtreidesSmall2, ABarracks3, delay, infantryToBuild, AttackGroupSize[Difficulty], attackTresholdSize)
 
 	AIProductionActivated = true
 end
