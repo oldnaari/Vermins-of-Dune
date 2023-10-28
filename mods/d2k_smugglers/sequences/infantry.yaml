@@ -67,86 +67,86 @@ civilian:
         Offset: -30,-24
 
 
-inquisitor:
-    stand:
-        Filename: inquisitor.shp
-        Facings: -8
-        Transpose: true
-        Offset: 4,-5
-    # change me \/
-    idle1:
-        Filename: inquisitor-idle1.shp
-        Length: 8
-        Tick: 80
-        Offset: 4,-5
-    idle2:
-        Filename: inquisitor-idle2.shp
-        Length: 8
-        Tick: 80
-        Offset: 4,-5
-    run:
-        Filename: inquisitor-run.shp
-        Length: 6
-        Facings: -8
-        Tick: 120
-        Offset: 4,-5
-    shoot:
-        Filename: inquisitor-shoot.shp
-        Length: 6
-        Facings: -8
-        Tick: 120
-        Offset: 4,-5
-    prone-stand:
-        Filename: DATA.R8
-        Start: 1034
-        Facings: -8
-        Transpose: true
-    prone-run:
-        Filename: DATA.R8
-        Start: 1042
-        Length: 3
-        Facings: -8
-        Transpose: true
-        Tick: 120
-    standup:
-        Filename: DATA.R8
-        Start: 1026
-        Facings: -8
-        Transpose: true
-        Tick: 120
-    prone-shoot:
-        Filename: DATA.R8
-        Start: 1058
-        Length: 6
-        Facings: -8
-        Transpose: true
-    die1:
-        Filename: DATA.R8
-        Frames: 1106, 1113, 1120, 1127, 1134, 1141, 1148, 1155, 1162, 1163, 1164, 1165
-        Length: 12
-        Tick: 80
-    die2:
-        Filename: DATA.R8
-        Frames: 1107, 1114, 1121, 1128, 1135, 1142, 1149, 1156
-        Length: 8
-        Tick: 80
-    die3:
-        Filename: DATA.R8
-        Frames: 1108, 1115, 1122, 1129, 1136, 1143, 1150, 1157
-        Length: 8
-        Tick: 80
-    die4:
-        Filename: DATA.R8
-        Frames: 1109, 1116, 1123, 1130, 1137, 1144, 1151, 1158
-        Length: 8
-        Tick: 80
-    die-crushed:
-        Filename:  DATA.R8
-        Frames: 1110, 1117, 1124, 1131, 1138, 1145, 1152, 1159
-        Length: 8
-        Tick: 800
-        ZOffset: -511
-    icon:
-        Filename: DATA.R8
-        Start: 4276
-        Offset: -30,-24
+#inquisitor:
+#    stand:
+#        Filename: inquisitor.shp
+#        Facings: -8
+#        Transpose: true
+#        Offset: 4,-5
+#    # change me \/
+#    idle1:
+#        Filename: inquisitor-idle1.shp
+#        Length: 8
+#        Tick: 80
+#        Offset: 4,-5
+#    idle2:
+#        Filename: inquisitor-idle2.shp
+#        Length: 8
+#        Tick: 80
+#        Offset: 4,-5
+#    run:
+#        Filename: inquisitor-run.shp
+#        Length: 6
+#        Facings: -8
+#        Tick: 120
+#        Offset: 4,-5
+#    shoot:
+#        Filename: inquisitor-shoot.shp
+#        Length: 6
+#        Facings: -8
+#        Tick: 120
+#        Offset: 4,-5
+#    prone-stand:
+#        Filename: DATA.R8
+#        Start: 1034
+#        Facings: -8
+#        Transpose: true
+#    prone-run:
+#        Filename: DATA.R8
+#        Start: 1042
+#        Length: 3
+#        Facings: -8
+#        Transpose: true
+#        Tick: 120
+#    standup:
+#        Filename: DATA.R8
+#        Start: 1026
+#        Facings: -8
+#        Transpose: true
+#        Tick: 120
+#    prone-shoot:
+#        Filename: DATA.R8
+#        Start: 1058
+#        Length: 6
+#        Facings: -8
+#        Transpose: true
+#    die1:
+#        Filename: DATA.R8
+#        Frames: 1106, 1113, 1120, 1127, 1134, 1141, 1148, 1155, 1162, 1163, 1164, 1165
+#        Length: 12
+#        Tick: 80
+#    die2:
+#        Filename: DATA.R8
+#        Frames: 1107, 1114, 1121, 1128, 1135, 1142, 1149, 1156
+#        Length: 8
+#        Tick: 80
+#    die3:
+#        Filename: DATA.R8
+#        Frames: 1108, 1115, 1122, 1129, 1136, 1143, 1150, 1157
+#        Length: 8
+#        Tick: 80
+#    die4:
+#        Filename: DATA.R8
+#        Frames: 1109, 1116, 1123, 1130, 1137, 1144, 1151, 1158
+#        Length: 8
+#        Tick: 80
+#    die-crushed:
+#        Filename:  DATA.R8
+#        Frames: 1110, 1117, 1124, 1131, 1138, 1145, 1152, 1159
+#        Length: 8
+#        Tick: 800
+#        ZOffset: -511
+#    icon:
+#        Filename: DATA.R8
+#        Start: 4276
+#        Offset: -30,-24

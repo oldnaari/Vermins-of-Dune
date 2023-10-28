@@ -43,7 +43,6 @@ power.smugglers:
         Filename: s-windtrap-cameo.shp
 		# Offset: -30,-24
 
-
 silo.smugglers:
 	idle:
         Filename: s-silo-idle.shp
@@ -463,3 +462,45 @@ palace.smugglers:
         Offset: -16,-16
 	icon:
         Filename:  s-palace-cameo.shp
+
+
+culture.atreides:
+    idle:
+        Filename: a-monument.shp
+        Offset: 1,-6
+    make:
+        Filename: s-barracks-crumble.shp
+        Length: 8
+        Offset: 4, 0
+    crumble-overlay:
+        Filename: s-barracks-crumble.shp
+        Start: 8
+        Offset: 4, 0
+        Length: 9
+        Tick: 100
+    damaged-idle:
+        Filename: a-monument-damaged.shp
+        Offset: 1,-6
+    bib:
+        Filename: BLOXBASE.R8
+        Frames: 617, 618, 637, 638
+        Length: 4
+        Offset: -16,-16
+    bib-Concrete:
+        Filename: BLOXBASE.R8
+        Frames: 649, 650, 669, 670
+        Length: 4
+        Offset: -16,-16
+    icon:
+        Filename: s-windtrap-cameo.shp
+#    make:
+#        Filename: DATA.R8
+#        Start: 4415
+#        Length: 12
+#        Offset: -32,64
+#    crumble-overlay:
+#        Filename: DATA.R8
+#        Start: 4427
+#        Length: 12
+#        Offset: -32,64
+#        Tick: 100

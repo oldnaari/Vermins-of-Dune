@@ -173,7 +173,7 @@ palace:
 		Prerequisite: palace.vulture
 		Factions: smuggler
 	VulturePower@vulture:
-		Name: Operation Vulture 
+		Name: Operation Vulture
 		Icon: vulture
 		Description: Vultures harvest enemy units and drop at your palace
 		Prerequisites: ~techlevel.superweapons, ~palace.vulture
@@ -188,3 +188,48 @@ palace:
 		ArrowSequence: arrow
 		CircleSequence: circles
 		SupportPowerPaletteOrder: 25
+
+
+culture.atreides:
+    Inherits: ^Building
+    Inherits@UPGRADEABLE: ^Upgradeable
+    Selectable:
+        Bounds: 2048, 2048
+    Valued:
+        Cost: 225
+    Tooltip:
+        Name: Monument
+    D2kBuilding:
+        Footprint: xx xx ==
+        Dimensions: 2,3
+        LocalCenterOffset: 0,-512,0
+    Encyclopedia:
+        Description: Monuments are constructions made by Atreides to honor heroism. Having one under control will allow you hire grenadiers.
+        Category: Buildings
+        Order: 30
+    Health:
+        HP: 32000
+    HitShape:
+        Type: Rectangle
+            TopLeft: -1024, -1024
+            BottomRight: 1024, 1024
+    Armor:
+        Type: building
+    RevealsShroud:
+        Range: 3c768
+    CommandBarBlacklist:
+        DisableStop: false
+    Production:
+        Produces: Upgrade
+    ProvidesPrerequisite:
+        Prerequisite: culture.atreides
+    Power:
+        Amount: -30
+    RenderSprites:
+        Image: culture.atreides
+    WithBuildingBib:
+    ProvidesPrerequisite@buildingname:
+    GrantConditionOnPrerequisite@UPGRADEABLE:
+        Prerequisites: upgrade.culture.atreides
+    RevealOnDeath:
+        Radius: 3c768

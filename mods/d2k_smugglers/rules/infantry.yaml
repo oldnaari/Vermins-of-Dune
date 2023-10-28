@@ -17,32 +17,32 @@ civilian:
 	-AttackFrontal:
 
 
-mpsardaukar:
-    Inherits: sardaukar
-    Tooltip:
-        Name: Inquisitor
-    Buildable:
-        Queue: Infantry
-        BuildPaletteOrder: 70
-        Prerequisites: ~barracks.harkonnen, upgrade.barracks, high_tech_factory, ~techlevel.medium
-        BuildDuration: 160
-        BuildDurationModifier: 100
-        Description: Elite assault infantry of Harkonnen\n  Strong vs Infantry, Vehicles\n  Weak vs Artillery
-    Valued:
-        Cost: 200
-    Armament@PRIMARY:
-        Weapon: M_LMG_H
-    Armament@SECONDARY:
-        Weapon: M_HMG_H
-    RenderSprites:
-        Image: inquisitor
-    UpdatesPlayerStatistics:
-        -OverrideActor:
+#mpsardaukar:
+#    Inherits: sardaukar
+#    Tooltip:
+#        Name: Inquisitor
+#    Buildable:
+#        Queue: Infantry
+#        BuildPaletteOrder: 70
+#        Prerequisites: ~barracks.harkonnen, upgrade.barracks, high_tech_factory, ~techlevel.medium
+#        BuildDuration: 160
+#        BuildDurationModifier: 100
+#        Description: Elite assault infantry of Harkonnen\n  Strong vs Infantry, Vehicles\n  Weak vs Artillery
+#    Valued:
+#        Cost: 200
+#    Armament@PRIMARY:
+#        Weapon: M_LMG_H
+#    Armament@SECONDARY:
+#        Weapon: M_HMG_H
+#    RenderSprites:
+#        Image: inquisitor
+#    UpdatesPlayerStatistics:
+#        -OverrideActor:
 
 
-thumper:
-	Buildable:
-		Prerequisites: upgrade.barracks
+#thumper:
+#	Buildable:
+#		Prerequisites: upgrade.barracks
 
 engineer:
 	Passenger:
@@ -53,3 +53,12 @@ fremen:
 	PassiveRegeneration:
 		Amount: 5
 
+
+c_grenadier:
+    Inherits: grenadier
+    Buildable:
+        Queue: Infantry
+        BuildPaletteOrder: 60
+        Prerequisites: ~culture.atreides
+    RenderSprites:
+        Image: grenadier
