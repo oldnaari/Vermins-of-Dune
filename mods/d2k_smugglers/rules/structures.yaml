@@ -184,7 +184,6 @@ palace:
 		SquadOffset: -4096, 2048, 0
 		UnitType: vulture
 		DisplayBeacon: True
-		CameraActor: camera
 		ArrowSequence: arrow
 		CircleSequence: circles
 		SupportPowerPaletteOrder: 25
