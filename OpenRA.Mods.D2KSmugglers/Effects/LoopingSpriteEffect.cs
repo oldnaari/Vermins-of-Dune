@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using OpenRA.Effects;
 using OpenRA.Graphics;
 
-namespace OpenRA.Mods.Common.Effects
+namespace OpenRA.Mods.D2KSmugglers.Effects
 {
 	public class LoopingSpriteEffect : IEffect, ISpatiallyPartitionable
 	{
@@ -57,7 +57,7 @@ namespace OpenRA.Mods.Common.Effects
 			anim = new Animation(world, image, facingFunc);
 		}
 
-		public void Tick(World world)
+		public void Tick(World w)
 		{
 			if (delay-- > 0)
 				return;
@@ -65,7 +65,7 @@ namespace OpenRA.Mods.Common.Effects
 			if (!initialized)
 			{
 				anim.PlayRepeating(sequence);
-				world.ScreenMap.Add(this, pos, anim.Image);
+				w.ScreenMap.Add(this, pos, anim.Image);
 				initialized = true;
 			}
 			else
@@ -73,7 +73,7 @@ namespace OpenRA.Mods.Common.Effects
 				anim.Tick();
 
 				pos = posFunc();
-				world.ScreenMap.Update(this, pos, anim.Image);
+				w.ScreenMap.Update(this, pos, anim.Image);
 			}
 
 			if (timeUntilForceKill-- <= 0)

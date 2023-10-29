@@ -1,11 +1,11 @@
 ﻿using System;
-
 using OpenRA.GameRules;
 using OpenRA.Mods.Common.Effects;
 using OpenRA.Mods.Common.Traits;
+using OpenRA.Mods.Common.Warheads;
 using OpenRA.Traits;
 
-namespace OpenRA.Mods.Common.Warheads
+namespace OpenRA.Mods.D2KSmugglers.Warheads
 {
 	public class SalvageYieldWarhead : Warhead
 	{

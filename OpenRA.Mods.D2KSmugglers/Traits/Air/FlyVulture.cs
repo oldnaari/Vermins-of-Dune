@@ -20,81 +20,57 @@ using OpenRA.Mods.Common.Traits.Render;
 using OpenRA.Primitives;
 using OpenRA.Traits;
 
-namespace OpenRA.Mods.D2KSmugglers.Traits
+namespace OpenRA.Mods.D2KSmugglers.Traits.Air
 {
 	public class FlyVultureInfo : AttackBaseInfo
 	{
-		[Desc("Tolerance for attack angle. Range [0, 512], 512 covers 360 degrees.")]
-		public new readonly WAngle FacingTolerance = new WAngle(8);
 		public override object Create(ActorInitializer init) { return new FlyVulture(init.Self, this); }
 	}
 
 	public enum OperationStateType
 	{
-		APPROACH,
-		HARVEST,
-		RETURN,
-		DROP
+		Approach,
+		Harvest,
+		Return,
+		Drop
 	}
 
 	public class OperationVulture : ISync
 	{
-		public WDist OperationAreaRadius;
-		public static readonly WDist PickUpDistance = new WDist(1024);
+		public static readonly WDist PickUpDistance = new(1024);
 
-		public List<Actor> Vultures = null;
+		public World World { get; }
 
-		[Sync]
-		public bool AreTargetsAcquired { get; private set; }
+		public WAngle AttackAngle { get; }
 
-		[Sync]
-		public WPos TargetPosition { get; private set; }
+		public string UnitType { get; }
 
-		[Sync]
-		public WPos DropPosition { get; private set; }
+		public WPos CheckpointStart { get; }
+		public WPos CheckpointTarget { get; }
+		public WPos CheckpointDropPoint { get; }
 
-		public World World { get; private set; }
-
-		public WAngle AttackAngle { get; private set; }
-
-		public string UnitType { get; private set; }
-
-		public WPos CheckpointStart { get; private set; }
-		public WPos CheckpointTarget { get; private set; }
-		public WPos CheckpointDropPoint { get; private set; }
-
-		public Player Owner { get; private set; }
-		public int RevealDuration { get; private set; }
-
-		public int LoopPeriodInTicks { get; private set; }
-		public int SquadSize { get; private set; }
-		public int VultureOffset { get; private set; }
-		public int LoopRadius { get; private set; }
+		public Player Owner { get; }
+		public int LoopPeriodInTicks { get; }
+		public int SquadSize { get; }
+		public int VultureOffset { get; }
+		public int LoopRadius { get; }
 
 		public OperationVulture(
 			WPos target,
 			WPos drop,
-			WDist operationAreaRadius,
 			WDist cordon,
 			string unitType,
 			Player owner,
-			int revealDuration,
 			int squadSize,
 			World world)
 		{
-			OperationAreaRadius = operationAreaRadius;
-			AreTargetsAcquired = false;
-			TargetPosition = target;
-			DropPosition = drop;
 			UnitType = unitType;
 			Owner = owner;
-			RevealDuration = revealDuration;
-			Vultures = new List<Actor>();
 			SquadSize = squadSize;
 			World = world;
 
 			var altitude = World.Map.Rules.Actors[UnitType].TraitInfo<AircraftInfo>().CruiseAltitude.Length;
-			var attackDirection = (target - drop);
+			var attackDirection = target - drop;
 			attackDirection = new WVec(attackDirection.X, attackDirection.Y, 0);
 			AttackAngle = WAngle.ArcTan(attackDirection.X, attackDirection.Y);
 
@@ -124,40 +100,33 @@ namespace OpenRA.Mods.D2KSmugglers.Traits
 
 		public void SendVultures(
 			WVec squadOffset,
-			Action<Actor> onEnterRange,
-			Action<Actor> onExitRange,
 			Action<Actor> onRemovedFromWorld)
 		{
 			for (var i = 0; i < SquadSize; i++)
 			{
 				// Includes the 90 degree rotation between body and world coordinates
-				var so = squadOffset;
-
 				var spawnOffsetShift = new WVec(0, -1024, 0).Rotate(WRot.FromYaw(AttackAngle));
 				var targetOffset = new WVec(-LoopRadius, 0, 0).Rotate(WRot.FromYaw(AttackAngle));
 
 				var vulture = World.CreateActor(false, UnitType, new TypeDictionary
 				{
-					new CenterPositionInit(CheckpointStart + (spawnOffsetShift * i * VultureOffset / 1024) + targetOffset),
+					new CenterPositionInit(CheckpointStart + spawnOffsetShift * i * VultureOffset / 1024 + targetOffset),
 					new OwnerInit(Owner),
 					new FacingInit(AttackAngle),
 				});
 
-				Vultures.Add(vulture);
 				var flyVulture = vulture.Trait<FlyVulture>();
-				flyVulture.OnEnteredOperationRange += onEnterRange;
-				flyVulture.OnExitedOperationRange += onExitRange;
 				flyVulture.OnRemovedFromWorld += onRemovedFromWorld;
 				flyVulture.Operation = this;
 
 				World.Add(vulture);
 
 				vulture.QueueActivity(new Fly(vulture, Target.FromPos(CheckpointTarget + targetOffset)));
-				vulture.QueueActivity(new CallFunc(() => vulture.Trait<FlyVulture>().State = OperationStateType.HARVEST));
+				vulture.QueueActivity(new CallFunc(() => vulture.Trait<FlyVulture>().State = OperationStateType.Harvest));
 				vulture.QueueActivity(new FlyIdle(vulture, 400 - i * LoopPeriodInTicks));
-				vulture.QueueActivity(new CallFunc(() => vulture.Trait<FlyVulture>().State = OperationStateType.RETURN));
+				vulture.QueueActivity(new CallFunc(() => vulture.Trait<FlyVulture>().State = OperationStateType.Return));
 				vulture.QueueActivity(new Fly(vulture, Target.FromPos(CheckpointDropPoint)));
-				vulture.QueueActivity(new CallFunc(() => vulture.Trait<FlyVulture>().State = OperationStateType.DROP));
+				vulture.QueueActivity(new CallFunc(() => vulture.Trait<FlyVulture>().State = OperationStateType.Drop));
 				vulture.QueueActivity(new Fly(vulture, Target.FromPos(CheckpointStart)));
 				vulture.QueueActivity(new RemoveSelf());
 			}
@@ -198,7 +167,7 @@ namespace OpenRA.Mods.D2KSmugglers.Traits
 			return true;
 		}
 
-		bool IsDockedHarvester(Actor other)
+		static bool IsDockedHarvester(Actor other)
 		{
 			if (other.TraitsImplementing<Harvester>().ToList().Count != 0)
 				return other.Trait<WithSpriteBody>().DefaultAnimation.CurrentSequence.Name == "dock-loop";
@@ -212,16 +181,17 @@ namespace OpenRA.Mods.D2KSmugglers.Traits
 			var candidates = World.FindActorsInCircle(blockCenterPosition, diagonal);
 			var rotation = WRot.FromYaw(-angle);
 
-			Func<Actor, bool> selector = (a) =>
+			bool Selector(Actor a)
 			{
 				var diff = (a.CenterPosition - blockCenterPosition).Rotate(rotation);
 
-				var isYInRange = (Math.Abs(diff.Y) < squareSize.Length + speed);
-				var isXInRange = (Math.Abs(diff.X) < squareSize.Length);
+				var isYInRange = Math.Abs(diff.Y) < squareSize.Length + speed;
+				var isXInRange = Math.Abs(diff.X) < squareSize.Length;
 
-				return isXInRange && isXInRange;
-			};
-			return candidates.Where(selector);
+				return isXInRange && isYInRange;
+			}
+
+			return candidates.Where(Selector);
 		}
 
 		public void CleanUp()
@@ -229,11 +199,9 @@ namespace OpenRA.Mods.D2KSmugglers.Traits
 		}
 	}
 
-	public class FlyVulture : AttackBase, ITick, ISync, INotifyRemovedFromWorld
+	public class FlyVulture : AttackBase, ITick, INotifyRemovedFromWorld
 	{
-		public event Action<Actor> OnRemovedFromWorld = self => { };
-		public event Action<Actor> OnEnteredOperationRange = self => { };
-		public event Action<Actor> OnExitedOperationRange = self => { };
+		public event Action<Actor> OnRemovedFromWorld = _ => { };
 
 		public OperationVulture Operation;
 		public OperationStateType State;
@@ -241,7 +209,7 @@ namespace OpenRA.Mods.D2KSmugglers.Traits
 		public FlyVulture(Actor self, FlyVultureInfo info)
 			: base(self, info)
 		{
-			State = OperationStateType.APPROACH;
+			State = OperationStateType.Approach;
 		}
 
 		void HarvestTick(Actor self)
@@ -268,10 +236,7 @@ namespace OpenRA.Mods.D2KSmugglers.Traits
 
 			var closestTarget = candidates.MaxBy(a => -(self.CenterPosition - a.CenterPosition).LengthSquared);
 
-			var selfPosition = new CPos(self.CenterPosition.X, self.CenterPosition.Y);
-			var closestTargetPosition = new CPos(closestTarget.CenterPosition.X, closestTarget.CenterPosition.Y);
-
-			self.World.AddFrameEndTask(w =>
+			self.World.AddFrameEndTask(_ =>
 			{
 				closestTarget.ChangeOwnerSync(self.Owner);
 				if (closestTarget.TraitsImplementing<Harvester>().ToList().Count != 0)
@@ -287,7 +252,6 @@ namespace OpenRA.Mods.D2KSmugglers.Traits
 		{
 			var carryall = self.Trait<Carryall>();
 			var body = self.Trait<BodyOrientation>();
-			var aircraft = self.Trait<Aircraft>();
 
 			if (carryall.Carryable == null)
 				return;
@@ -331,10 +295,10 @@ namespace OpenRA.Mods.D2KSmugglers.Traits
 		{
 			switch (State)
 			{
-				case OperationStateType.HARVEST:
+				case OperationStateType.Harvest:
 					HarvestTick(self);
 					break;
-				case OperationStateType.DROP:
+				case OperationStateType.Drop:
 					DropTick(self);
 					break;
 			}
@@ -347,7 +311,8 @@ namespace OpenRA.Mods.D2KSmugglers.Traits
 			OnRemovedFromWorld(self);
 		}
 
-		public override Activity GetAttackActivity(Actor self, AttackSource source, in Target newTarget, bool allowMove, bool forceAttack, Color? targetLineColor)
+		public override Activity GetAttackActivity(Actor self, AttackSource source, in Target newTarget,
+			bool allowMove, bool forceAttack, Color? targetLineColor = null)
 		{
 			throw new NotImplementedException("AttackBomber requires vulture scripted Target");
 		}

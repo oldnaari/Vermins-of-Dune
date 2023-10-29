@@ -11,11 +11,12 @@
 
 using System.Collections.Generic;
 using OpenRA.Graphics;
+using OpenRA.Mods.Common.LoadScreens;
 using OpenRA.Primitives;
 
-namespace OpenRA.Mods.Common.LoadScreens
+namespace OpenRA.Mods.D2KSmugglers.LoadScreens
 {
-	public sealed class VerminsOFDuneLoadScreen : SheetLoadScreen
+	public sealed class VerminsOfDuneLoadScreen : SheetLoadScreen
 	{
 		float2 logoPos;
 		Sprite logo;
@@ -46,7 +47,9 @@ namespace OpenRA.Mods.Common.LoadScreens
 			if (r.Resolution != lastResolution)
 			{
 				lastResolution = r.Resolution;
-				logoPos = new float2(lastResolution.Width / 2 - 512, lastResolution.Height / 2 - 512);
+				logoPos = new float2(
+					(float)lastResolution.Width / 2 - 512,
+					(float)lastResolution.Height / 2 - 512);
 			}
 
 			if (logo != null)

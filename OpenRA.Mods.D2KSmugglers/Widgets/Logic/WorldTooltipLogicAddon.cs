@@ -4,7 +4,7 @@ using OpenRA.Primitives;
 using OpenRA.Traits;
 using OpenRA.Widgets;
 
-namespace OpenRA.Mods.Smugglers
+namespace OpenRA.Mods.D2KSmugglers.Widgets.Logic
 {
 	public class WorldTooltipLogicAddon : ChromeLogic
 	{

@@ -1,10 +1,10 @@
 ﻿using System;
-
 using OpenRA.GameRules;
 using OpenRA.Mods.Common.Traits;
+using OpenRA.Mods.Common.Warheads;
 using OpenRA.Traits;
 
-namespace OpenRA.Mods.Common.Warheads
+namespace OpenRA.Mods.D2KSmugglers.Warheads
 {
 	public class SalvageTargetWarhead : SpreadDamageWarhead
 	{
@@ -17,7 +17,7 @@ namespace OpenRA.Mods.Common.Warheads
 		const int SalvageResourceMultiplier = 100;
 		protected override void InflictDamage(Actor victim, Actor firedBy, HitShape shape, WarheadArgs args)
 		{
-			var victimMaxHP = victim.Info.TraitInfo<HealthInfo>().HP;
+			var victimMaxHp = victim.Info.TraitInfo<HealthInfo>().HP;
 			var victimCost = victim.Info.TraitInfo<ValuedInfo>().Cost;
 
 			var damage = Damage * DamageVersus(victim, shape, args) / 100;
@@ -29,28 +29,27 @@ namespace OpenRA.Mods.Common.Warheads
 
 			var healthAfterDamage = victim.Trait<Health>().HP;
 
-			var salvageGain = (long)SalvageResourceMultiplier * ResourceYield * (healthBeforeDamage - healthAfterDamage) * victimCost / victimMaxHP / 100;
+			var salvageGain = (long)SalvageResourceMultiplier * ResourceYield * (healthBeforeDamage - healthAfterDamage) * victimCost / victimMaxHp / 100;
 
 			salvageGain = salvageGain > 0 ? salvageGain : 0;
 
-			Func<WPos> muzzlePosition = () => victim.CenterPosition;
+			WPos MuzzlePosition() => victim.CenterPosition;
 
 			var firedByMobileTrait = firedBy.Trait<IFacing>();
-			Func<WAngle> muzzleFacing = () => firedByMobileTrait.Facing;
-
-			WeaponInfo weaponYield;
-			victim.World.Map.Rules.Weapons.TryGetValue(WeaponYieldInfo.ToLower(), out weaponYield);
+			WAngle MuzzleFacing() => firedByMobileTrait.Facing;
+			victim.World.Map.Rules.Weapons.TryGetValue(WeaponYieldInfo.ToLowerInvariant(),
+				out var weaponYield);
 
 			var argsReturn = new ProjectileArgs
 			{
 				Weapon = weaponYield,
-				Facing = muzzleFacing(),
-				CurrentMuzzleFacing = muzzleFacing,
-				DamageModifiers = new int[] { (int)salvageGain },
+				Facing = MuzzleFacing(),
+				CurrentMuzzleFacing = MuzzleFacing,
+				DamageModifiers = new[] { (int)salvageGain },
 				InaccuracyModifiers = Array.Empty<int>(),
 				RangeModifiers = Array.Empty<int>(),
-				Source = muzzlePosition(),
-				CurrentSource = muzzlePosition,
+				Source = MuzzlePosition(),
+				CurrentSource = MuzzlePosition,
 				SourceActor = victim,
 				PassiveTarget = firedBy.CenterPosition,
 				GuidedTarget = Target.FromActor(firedBy)

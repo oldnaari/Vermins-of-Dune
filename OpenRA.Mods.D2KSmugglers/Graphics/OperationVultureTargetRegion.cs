@@ -20,7 +20,7 @@ namespace OpenRA.Mods.D2KSmugglers.Graphics
 {
 	public class OperationVultureTargetRegion : IRenderable, IFinalizedRenderable
 	{
-		readonly WPos centerPosition;
+		public WPos CenterPosition { get; }
 		readonly int width;
 		readonly Color colorLight;
 		readonly Color colorDark1;
@@ -30,32 +30,33 @@ namespace OpenRA.Mods.D2KSmugglers.Graphics
 		 Color colorDark1,
 		 Color colorDark2)
 		{
-			this.centerPosition = centerPosition;
+			this.CenterPosition = centerPosition;
 			this.width = width;
 			this.colorLight = colorLight;
 			this.colorDark1 = colorDark1;
 			this.colorDark2 = colorDark2;
 		}
 
-		public WPos Pos => centerPosition;
+		public WPos Pos => CenterPosition;
 		public int ZOffset => 0;
 		public bool IsDecoration => true;
 
 		public IRenderable WithZOffset(int newOffset)
 		{
-			 return new OperationVultureTargetRegion(centerPosition, width, colorLight, colorDark1, colorDark2);
+			 return new OperationVultureTargetRegion(CenterPosition, width, colorLight, colorDark1, colorDark2);
 		}
 
 		public IRenderable OffsetBy(in WVec vec)
 		{
-			return new OperationVultureTargetRegion(centerPosition + vec, width, colorLight, colorDark1, colorDark2);
+			return new OperationVultureTargetRegion(CenterPosition + vec, width,
+				colorLight, colorDark1, colorDark2);
 		}
 
 		public IRenderable AsDecoration() { return this; }
 
 		public IFinalizedRenderable PrepareRender(WorldRenderer wr) { return this; }
 
-		IEnumerable<(double, double)> Rotate(IEnumerable<(double, double)> array)
+		static IEnumerable<(double NCellsX, double NCellsY)> Rotate(IEnumerable<(double NCellsX, double NCellsY)> array)
 		{
 			foreach ((var x, var y) in array)
 			{
@@ -63,9 +64,9 @@ namespace OpenRA.Mods.D2KSmugglers.Graphics
 			}
 		}
 
-		IEnumerable<IEnumerable<(double, double)>> GetBracers()
+		static IEnumerable<IEnumerable<(double NCellsX, double NCellsY)>> GetBracers()
 		{
-			IEnumerable<(double, double)> bracerBottom = new (double, double)[]
+			IEnumerable<(double, double)> bracerBottom = new[]
 			{
 				(-1.50, 4.75),
 				(-1.50, 4.50),
@@ -75,11 +76,11 @@ namespace OpenRA.Mods.D2KSmugglers.Graphics
 
 			for (var i = 0; i < 4; i++)
 			{
-				bracerBottom = Rotate(bracerBottom);
+				bracerBottom = Rotate(bracerBottom).ToList();
 				yield return bracerBottom;
 			}
 
-			IEnumerable<(double, double)> bracerDiag = new (double, double)[]
+			IEnumerable<(double, double)> bracerDiag = new[]
 			{
 				(-2.50, 4.25),
 				(-2.50, 4.50),
@@ -91,44 +92,44 @@ namespace OpenRA.Mods.D2KSmugglers.Graphics
 
 			for (var i = 0; i < 4; i++)
 			{
-				bracerDiag = Rotate(bracerDiag);
+				bracerDiag = Rotate(bracerDiag).ToList();
 				yield return bracerDiag;
 			}
 		}
 
-		IEnumerable<IEnumerable<(double, double)>> GetRotationLines()
+		static IEnumerable<IEnumerable<(double NCellsX, double NCellsY)>> GetRotationLines()
 		{
-			IEnumerable<(double, double)> lineAxes = new (double, double)[]
+			IEnumerable<(double, double)> lineAxes = new[]
 			{
 				(-0.5, 5.0),
 				(0.5, 5.0),
 			};
 
-			IEnumerable<(double, double)> subLine = new (double, double)[]
+			IEnumerable<(double, double)> subLine = new[]
 			{
 				(-0.25, 4.75),
 				(0.25, 4.75),
 			};
 
-			IEnumerable<(double, double)> subLine2 = new (double, double)[]
+			IEnumerable<(double, double)> subLine2 = new[]
 			{
 				(-0.25, 5.25),
 				(0.25, 5.25),
 			};
 
-			IEnumerable<(double, double)> lineDiag = new (double, double)[]
+			IEnumerable<(double, double)> lineDiag = new[]
 			{
 				(-4.0, 3.5),
 				(-3.5, 4.0),
 			};
 
-			IEnumerable<(double, double)> segments1 = new (double, double)[]
+			IEnumerable<(double, double)> segments1 = new[]
 			{
 				(-1.75, 5.00),
 				(-2.25, 5.00),
 			};
 
-			IEnumerable<(double, double)> segments2 = new (double, double)[]
+			IEnumerable<(double, double)> segments2 = new[]
 			{
 				(1.75, 5.00),
 				(2.25, 5.00),
@@ -140,18 +141,21 @@ namespace OpenRA.Mods.D2KSmugglers.Graphics
 				var c = contour;
 				for (var i = 0; i < 4; i++)
 				{
-					c = Rotate(c);
+					c = Rotate(c).ToList();
 					yield return c;
 				}
 			}
 		}
 
-		IEnumerable<(WVec, WVec)> IterSegments(IEnumerable<(double, double)> source)
+		static IEnumerable<(WVec PosX, WVec PosY)> IterSegments(IEnumerable<(double NCellsX, double NCellsY)> source)
 		{
 			var isFirstStep = true;
 			WVec a = default;
 
-			foreach (var b in source.Select((t, i) => new WVec((int)(t.Item1 * 1024), (int)(t.Item2 * 1024), 0)))
+			foreach (var b in source.Select(t => new WVec(
+					         (int)(t.NCellsX * 1024),
+					         (int)(t.NCellsY * 1024),
+					         0)))
 			{
 				if (!isFirstStep)
 					yield return (a, b);
@@ -166,7 +170,7 @@ namespace OpenRA.Mods.D2KSmugglers.Graphics
 			var diameter = 6.5;
 			var tangent = 4.5;
 
-			var positionsRaw = new (double, double)[]
+			var positionsRaw = new (double NCellsX, double NCellsY)[]
 			{
 				(diameter, -tangent),
 				(diameter, tangent),
@@ -177,17 +181,17 @@ namespace OpenRA.Mods.D2KSmugglers.Graphics
 				(-tangent, -diameter),
 				(tangent, -diameter),
 			};
-
-			var sr = Game.Renderer.SpriteRenderer;
-
 			var colorPolygon = Color.FromArgb(32, 64, 32, 16);
 
 			var vertices = positionsRaw.Select(x =>
 				wr.Viewport.WorldToViewPx(
 					wr.ScreenPosition(
-						centerPosition + new WVec((int)(x.Item1 * 1024), (int)(x.Item2 * 1024), 0))));
+						CenterPosition + new WVec(
+							(int)(x.NCellsX * 1024),
+							(int)(x.NCellsY * 1024),
+							0))));
 
-			var vertexArray = vertices.Select(x => new float3((float)x.X, (float)x.Y, 0.0f)).Cast<float3>().ToArray();
+			var vertexArray = vertices.Select(x => new float3(x.X, x.Y, 0.0f)).ToArray();
 
 			foreach (var i in Enumerable.Range(2, vertexArray.Length))
 			{
@@ -205,22 +209,22 @@ namespace OpenRA.Mods.D2KSmugglers.Graphics
 			{
 				foreach ((var posStart, var posEnd) in IterSegments(contour))
 				{
-					var a = wr.Viewport.WorldToViewPx(wr.ScreenPosition(centerPosition + posStart));
-					var b = wr.Viewport.WorldToViewPx(wr.ScreenPosition(centerPosition + posEnd));
+					var a = wr.Viewport.WorldToViewPx(wr.ScreenPosition(CenterPosition + posStart));
+					var b = wr.Viewport.WorldToViewPx(wr.ScreenPosition(CenterPosition + posEnd));
 					cr.DrawLine(a, b, width, colorLight, BlendMode.Multiply);
 				}
 			}
 
 			var t = ((double)DateTime.Now.Millisecond / 1000 + DateTime.Now.Second % 3) * Math.PI * 2 / 3;
-			t = (1.0 + System.Math.Sin(t)) / 2;
+			t = (1.0 + Math.Sin(t)) / 2;
 			var color = Exts.ColorLerp((float)t, colorDark1, colorDark2);
 
 			foreach (var contour in GetRotationLines())
 			{
 				foreach ((var posStart, var posEnd) in IterSegments(contour))
 				{
-					var a = wr.Viewport.WorldToViewPx(wr.ScreenPosition(centerPosition + posStart));
-					var b = wr.Viewport.WorldToViewPx(wr.ScreenPosition(centerPosition + posEnd));
+					var a = wr.Viewport.WorldToViewPx(wr.ScreenPosition(CenterPosition + posStart));
+					var b = wr.Viewport.WorldToViewPx(wr.ScreenPosition(CenterPosition + posEnd));
 					cr.DrawLine(a, b, width, color);
 				}
 			}

@@ -20,11 +20,10 @@ namespace OpenRA.Mods.D2KSmugglers.Graphics
 {
 	public struct SalvageContrailRenderable : IRenderable, IFinalizedRenderable
 	{
-		public int Length { get { return trail.Length; } }
+		public int Length => trail.Length;
 
 		readonly World world;
 		readonly Color color;
-		readonly int zOffset;
 
 		// Store trail positions in a circular buffer
 		readonly WPos[] trail;
@@ -45,12 +44,12 @@ namespace OpenRA.Mods.D2KSmugglers.Graphics
 			this.length = length;
 			this.skip = skip;
 			this.color = color;
-			this.zOffset = zOffset;
+			this.ZOffset = zOffset;
 		}
 
 		public WPos Pos { get { return trail[Index(next - 1)]; } }
 		public PaletteReference Palette { get { return null; } }
-		public int ZOffset { get { return zOffset; } }
+		public int ZOffset { get; private set; }
 		public bool IsDecoration { get { return true; } }
 
 		public IRenderable WithZOffset(int newOffset) { return new SalvageContrailRenderable(world, (WPos[])trail.Clone(), width, next, length, skip, color, newOffset); }
@@ -58,19 +57,19 @@ namespace OpenRA.Mods.D2KSmugglers.Graphics
 		{
 			// Lambdas can't use 'in' variables, so capture a copy for later
 			var offset = vec;
-			return new SalvageContrailRenderable(world, trail.Select(pos => pos + offset).ToArray(), width, next, length, skip, color, zOffset);
+			return new SalvageContrailRenderable(world, trail.Select(pos => pos + offset).ToArray(), width, next, length, skip, color, ZOffset);
 		}
 
 		public IRenderable AsDecoration() { return this; }
 
 		public IFinalizedRenderable PrepareRender(WorldRenderer wr) { return this; }
 
-		public static float PositionBasedRadiusModifier(float time_in_seconds, WPos position)
+		public static float PositionBasedRadiusModifier(float timeInSeconds, WPos position)
 		{
-			var mutliplier = (
-				(1.0 + 0.3 * Math.Sin((double)position.X * 100.0 + 10.0 * time_in_seconds)) *
-				(1.0 + 0.3 * Math.Sin((double)position.Y * 100.0 + 10.0 * time_in_seconds)) *
-				(1.0 + 0.3 * Math.Sin((double)position.Z * 100.0 + 10.0 * time_in_seconds)));
+			var mutliplier =
+				(1.0 + 0.3 * Math.Sin(position.X * 100.0 + 10.0 * timeInSeconds)) *
+				(1.0 + 0.3 * Math.Sin(position.Y * 100.0 + 10.0 * timeInSeconds)) *
+				(1.0 + 0.3 * Math.Sin(position.Z * 100.0 + 10.0 * timeInSeconds));
 
 			return (float)mutliplier;
 		}
@@ -104,8 +103,8 @@ namespace OpenRA.Mods.D2KSmugglers.Graphics
 
 				if (!world.FogObscures(curPos) && !world.FogObscures(nextPos))
 				{
-					var time_in_seconds = (float)wr.World.Timestep / 30;
-					var modifier = PositionBasedRadiusModifier(time_in_seconds, curPos);
+					var timeInSeconds = (float)wr.World.Timestep / 30;
+					var modifier = PositionBasedRadiusModifier(timeInSeconds, curPos);
 					wcr.DrawLine(wr.Screen3DPosition(curPos), wr.Screen3DPosition(nextPos), modifier * screenWidth, curColor, nextColor);
 				}
 
