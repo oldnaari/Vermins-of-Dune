@@ -47,10 +47,9 @@ namespace OpenRA.Mods.D2KSmugglers.Graphics
 			this.ZOffset = zOffset;
 		}
 
-		public WPos Pos { get { return trail[Index(next - 1)]; } }
-		public PaletteReference Palette { get { return null; } }
-		public int ZOffset { get; private set; }
-		public bool IsDecoration { get { return true; } }
+		public WPos Pos => trail[Index(next - 1)];
+		public int ZOffset { get; }
+		public bool IsDecoration => true;
 
 		public IRenderable WithZOffset(int newOffset) { return new SalvageContrailRenderable(world, (WPos[])trail.Clone(), width, next, length, skip, color, newOffset); }
 		public IRenderable OffsetBy(in WVec vec)
@@ -78,10 +77,9 @@ namespace OpenRA.Mods.D2KSmugglers.Graphics
 		{
 			if (t < 0.5)
 				return Exts.ColorLerp(2 * t, Color.FromArgb(0x00ff0000), Color.FromArgb(0x22000000));
-			else if (t < 0.75)
+			if (t < 0.75)
 				return Exts.ColorLerp(4 * t - 2, Color.FromArgb(0x22000000), Color.FromArgb(0x88000000));
-			else
-				return Exts.ColorLerp(4 * t - 3, Color.FromArgb(0x88000000), Color.FromArgb(0x00000000));
+			return Exts.ColorLerp(4 * t - 3, Color.FromArgb(0x88000000), Color.FromArgb(0x00000000));
 		}
 
 		public void Render(WorldRenderer wr)
