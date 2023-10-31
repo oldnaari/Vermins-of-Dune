@@ -1,6 +1,6 @@
 MapFormat: 12
 
-RequiresMod: d2k
+RequiresMod: d2k_smugglers
 
 Title: Harkonnen 09a
 
@@ -37,49 +37,49 @@ Players:
 		Enemies: Atreides Main Base, Atreides Small Base 1, Atreides Small Base 2, Corrino Main Base, Corrino Small Base, Creeps
 	PlayerReference@Atreides Main Base:
 		Name: Atreides Main Base
+		Bot: campaign
 		LockFaction: True
 		Faction: atreides
 		LockColor: True
 		Color: 5A7394
 		Allies: Atreides Small Base 1, Atreides Small Base 2, Corrino Main Base, Corrino Small Base
 		Enemies: Harkonnen, Creeps
-		Bot: campaign
 	PlayerReference@Atreides Small Base 1:
 		Name: Atreides Small Base 1
+		Bot: campaign
 		LockFaction: True
 		Faction: atreides
 		LockColor: True
 		Color: 5A7394
 		Allies: Atreides Main Base, Atreides Small Base 2, Corrino Main Base, Corrino Small Base
 		Enemies: Harkonnen, Creeps
-		Bot: campaign
 	PlayerReference@Atreides Small Base 2:
 		Name: Atreides Small Base 2
+		Bot: campaign
 		LockFaction: True
 		Faction: atreides
 		LockColor: True
 		Color: 5A7394
 		Allies: Atreides Main Base, Atreides Small Base 1, Corrino Main Base, Corrino Small Base
 		Enemies: Harkonnen, Creeps
-		Bot: campaign
 	PlayerReference@Corrino Main Base:
 		Name: Corrino Main Base
+		Bot: campaign
 		LockFaction: True
 		Faction: corrino
 		LockColor: True
 		Color: 73007B
 		Allies: Atreides Main Base, Atreides Small Base 1, Atreides Small Base 2, Corrino Small Base
 		Enemies: Harkonnen, Creeps
-		Bot: campaign
 	PlayerReference@Corrino Small Base:
 		Name: Corrino Small Base
+		Bot: campaign
 		LockFaction: True
 		Faction: corrino
 		LockColor: True
 		Color: 73007B
 		Allies: Atreides Main Base, Atreides Small Base 1, Atreides Small Base 2, Corrino Main Base
 		Enemies: Harkonnen, Creeps
-		Bot: campaign
 
 Actors:
 	Actor0: combat_tank_a
@@ -598,9 +598,6 @@ Actors:
 	Actor171: wall
 		Location: 22,30
 		Owner: Atreides Small Base 2
-	ABarracks4: barracks
-		Location: 23,30
-		Owner: Atreides Small Base 2
 	APower22: wind_trap
 		Location: 25,30
 		Owner: Atreides Small Base 2
@@ -1042,6 +1039,24 @@ Actors:
 	CorrinoStarportExit: waypoint
 		Owner: Neutral
 		Location: 2,13
+	AMonument: culture.atreides
+		Owner: Atreides Small Base 2
+		Location: 23,30
+	Actor320: grenadier
+		Owner: Atreides Small Base 2
+		SubCell: 3
+		Location: 23,33
+		Facing: 63
+	Actor321: grenadier
+		Owner: Atreides Small Base 2
+		SubCell: 3
+		Location: 26,32
+		Facing: 531
+	Actor322: grenadier
+		Owner: Atreides Small Base 2
+		SubCell: 3
+		Location: 22,32
+		Facing: 523
 
 Rules: d2k|rules/campaign-rules.yaml, d2k|rules/campaign-tooltips.yaml, d2k|rules/campaign-palettes.yaml, rules.yaml
 

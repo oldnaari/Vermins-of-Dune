@@ -67,7 +67,7 @@ ActivateAI = function()
 	ProduceUnits(AtreidesSmall1, ALightFactory2, delay, vehilcesToBuild, AttackGroupSize[Difficulty], attackThresholdSize)
 	ProduceUnits(AtreidesSmall1, AHeavyFactory2, delay, tanksToBuildAtreidesSmall, AttackGroupSize[Difficulty], attackThresholdSize)
 
-	ProduceUnits(AtreidesSmall2, ABarracks4, delay, infantryToBuild, AttackGroupSize[Difficulty], attackThresholdSize)
+-- 	ProduceUnits(AtreidesSmall2, ABarracks4, delay, infantryToBuild, AttackGroupSize[Difficulty], attackThresholdSize)
 
 	ProduceUnits(CorrinoMain, CBarracks1, delay, infantryToBuildCorrinoMain, AttackGroupSize[Difficulty], attackThresholdSize)
 	ProduceUnits(CorrinoMain, CLightFactory1, delay, vehilcesToBuild, AttackGroupSize[Difficulty], attackThresholdSize)

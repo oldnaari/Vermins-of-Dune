@@ -85,39 +85,9 @@ InitialReinforcementsPaths =
 }
 
 AtreidesPilgrimReinforcements = {
-	easy =
-	{
-		{ "grenadier", "light_inf", "light_inf" },
-		{ "grenadier", "trooper", "light_inf" },
-		{ "grenadier", "light_inf", "trooper" },
-		{ "grenadier", "light_inf", "light_inf" },
-		{ "grenadier", "trooper", "light_inf" },
-		{ "grenadier", "light_inf", "trooper" },
-		{ "grenadier", "light_inf", "light_inf" },
-		{ "grenadier", "light_inf", "light_inf" },
-	},
-	normal =
-	{
-		{ "grenadier", "grenadier", "light_inf" },
-		{ "grenadier", "grenadier", "light_inf" },
-		{ "grenadier", "grenadier", "trooper" },
-		{ "grenadier", "grenadier", "light_inf" },
-		{ "grenadier", "grenadier", "trooper" },
-		{ "grenadier", "grenadier", "trooper" },
-		{ "grenadier", "grenadier", "light_inf" },
-		{ "grenadier", "grenadier", "trooper" },
-    },
-	hard =
-	{
-		{ "grenadier", "grenadier", "light_inf", "light_inf" },
-		{ "grenadier", "grenadier", "light_inf", "light_inf" },
-		{ "grenadier", "grenadier", "light_inf", "trooper" },
-		{ "grenadier", "grenadier", "light_inf", "light_inf" },
-		{ "grenadier", "grenadier", "light_inf", "grenadier" },
-		{ "grenadier", "grenadier", "light_inf", "trooper" },
-		{ "grenadier", "grenadier", "light_inf", "trooper" },
-		{ "grenadier", "grenadier", "light_inf", "grenadier" },
-    }
+	easy = { "grenadier", "light_inf", "light_inf" },
+	normal = { "grenadier", "grenadier", "light_inf" },
+	hard = { "grenadier", "grenadier", "light_inf", "light_inf" },
 }
 
 ToHarvest =
@@ -133,7 +103,7 @@ Hunt = function(house)
 	end)
 end
 
-MonumentReinforcementsOn = false
+MonumentReinforcementsOff = false
 
 CheckHarvester = function(house)
 	if DateTime.GameTime % DateTime.Seconds(10) == 0 and LastHarvesterEaten[house] then
@@ -230,12 +200,12 @@ WorldLoaded = function()
 							   huntFunction)
 
 	local pathPilgrims = function() return {AtreidesEntry3.Location, AtreidesRally3.Location} end
-	local waveConditionPilgrims = function() return MonumentReinforcementsOn end
+	local waveConditionPilgrims = function() return MonumentReinforcementsOff end
 	local huntFunctionPilgrims = function(unit)
 		unit.AttackMove(AtreidesAttackLocation)
 		IdleHunt(unit)
 	end
-	SendCarryallReinforcements(AtreidesMain, 0, 8,
+	SendMonumentReinforcements(AtreidesMain,
 							   AtreidesAttackDelay[Difficulty],
 							   pathPilgrims,
 							   AtreidesPilgrimReinforcements[Difficulty],
@@ -281,6 +251,6 @@ WorldLoaded = function()
 		end
 	end)
 	Trigger.OnKilledOrCaptured(AMonument, function()
-		MonumentReinforcementsOn = true
+		MonumentReinforcementsOff = true
 	end)
 end

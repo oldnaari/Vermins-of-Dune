@@ -8,8 +8,8 @@
 ]]
 
 AtreidesMainBase = { AConYard1, AOutpost1, APalace, ARefinery1, ARefinery2, ARefinery3, AHeavyFactory1, ALightFactory1, AStarport, AHiTechFactory, AResearch, AGunt1, AGunt2, AGunt3, AGunt4, AGunt5, ARock1, ARock2, ARock3, ARock4, ABarracks1, ABarracks2, APower1, APower2, APower3, APower4, APower5, APower6, APower7, APower8, APower9, APower10, APower11, APower12, APower13, APower14 }
-AtreidesSmall1Base = { AConYard2, ARefinery4, ABarracks3, AHeavyFactory2, ALightFactory2, ARepair, ARock5, ARock6, ARock7, ARock8, ARock9, APower15, APower16, APower17, APower18, APower19, APower20 }
-AtreidesSmall2Base = { AOutpost2, ABarracks3, AGunt6, AGunt7, AGunt8, ARock10, APower21, APower22 }
+AtreidesSmall1Base = { AConYard2, ARefinery4, ABarracks3, AHeavyFactory2, ALightFactory2, ARepair, ARock5, ARock6, ARock7, ARock8, ARock9, APower15, APower16, APower17, APower18, APower19, APower20, APower21 }
+AtreidesSmall2Base = { AOutpost2, AMonument, AGunt6, AGunt7, AGunt8, ARock10, APower22, APower23 }
 CorrinoMainBase = { COutpost, CPalace, CRefinery1, CHeavyFactory1, CLightFactory1, CStarport, CResearch, CGunt1, CGunt2, CRock1, CRock2, CBarracks1, CPower1, CPower2, CPower3, CPower4, CPower5, CPower6, CPower7 }
 CorrinoSmallBase = { CConYard, CRefinery2, CHeavyFactory2, CLightFactory2, CRock3, CRock4, CBarracks2, CPower8, CPower9, CPower10, CPower11 }
 
@@ -42,6 +42,13 @@ AtreidesReinforcements =
 		{ "sonic_tank", "combat_tank_a", "combat_tank_a", "quad" }
 	}
 }
+
+AtreidesPilgrimReinforcements = {
+	easy = { "grenadier", "grenadier", "light_inf", "light_inf" },
+	normal = { "grenadier", "grenadier", "grenadier", "grenadier", "light_inf" },
+	hard = { "grenadier", "grenadier", "grenadier", "grenadier", "light_inf", "light_inf", "light_inf" },
+}
+MonumentReinforcementsOff = false
 
 CorrinoStarportReinforcements =
 {
@@ -155,7 +162,8 @@ end
 
 SendHarkonnenReinforcements = function(delay)
 	Trigger.AfterDelay(delay, function()
-		Reinforcements.ReinforceWithTransport(Harkonnen, "carryall.reinforce", HarkonnenReinforcements, HarkonnenPath, { HarkonnenPath[1] })
+		Reinforcements.ReinforceWithTransport(Harkonnen, "carryall.reinforce",
+		 HarkonnenReinforcements, HarkonnenPath, { HarkonnenPath[1] })
 		Trigger.AfterDelay(DateTime.Seconds(5), function()
 			Media.PlaySpeechNotification(Harkonnen, "Reinforce")
 		end)
@@ -289,6 +297,20 @@ WorldLoaded = function()
 	Trigger.AfterDelay(DateTime.Minutes(5), SendAirStrike)
 	Trigger.AfterDelay(DateTime.Minutes(1) + DateTime.Seconds (30), BuildFremen)
 
+
+	local pathPilgrims = function() return {AtreidesEntry10.Location, AtreidesRally10.Location} end
+	local waveConditionPilgrims = function() return MonumentReinforcementsOff end
+	local huntFunctionPilgrims = function(unit)
+		unit.AttackMove(AtreidesAttackLocation)
+		IdleHunt(unit)
+	end
+	SendMonumentReinforcements(AtreidesMain,
+							   AtreidesAttackDelay[Difficulty],
+							   pathPilgrims,
+							   AtreidesPilgrimReinforcements[Difficulty],
+							   waveConditionPilgrims,
+							   huntFunctionPilgrims)
+
 	Trigger.OnAllKilledOrCaptured(AtreidesMainBase, function()
 		Utils.Do(AtreidesMain.GetGroundAttackers(), IdleHunt)
 	end)
@@ -298,6 +320,7 @@ WorldLoaded = function()
 	end)
 
 	Trigger.OnAllKilledOrCaptured(AtreidesSmall2Base, function()
+		MonumentReinforcementsOff = true
 		Utils.Do(AtreidesSmall2.GetGroundAttackers(), IdleHunt)
 	end)
 
