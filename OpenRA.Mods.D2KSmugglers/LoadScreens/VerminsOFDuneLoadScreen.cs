@@ -31,8 +31,8 @@ namespace OpenRA.Mods.D2KSmugglers.LoadScreens
 		{
 			base.Init(modData, info);
 
-			if (info.ContainsKey("Text"))
-				messages = info["Text"].Split(',');
+			if (info.TryGetValue("Text", out var text))
+				messages = text.Split(',');
 		}
 
 		public override void DisplayInner(Renderer r, Sheet s, int density)
