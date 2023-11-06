@@ -35,7 +35,7 @@ namespace OpenRA.Mods.D2KSmugglers.Traits.Air
 		Drop
 	}
 
-	public class OperationVulture : ISync
+	public class OperationVulture
 	{
 		public static readonly WDist PickUpDistance = new(1024);
 
