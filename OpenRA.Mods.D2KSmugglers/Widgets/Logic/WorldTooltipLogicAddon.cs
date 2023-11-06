@@ -95,7 +95,7 @@ namespace OpenRA.Mods.D2KSmugglers.Widgets.Logic
 					if (world.Map.Visibility == MapVisibility.MissionSelector)
 						ownerName = o.PlayerReference.Name;
 					else
-						ownerName = o.PlayerName;
+						ownerName = o.Faction.Name;
 
 					ownerColor = o.Color;
 					widget.Bounds.Height = doubleHeight;
