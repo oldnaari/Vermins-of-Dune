@@ -1,10 +1,11 @@
 InfantryVoice:
 	DefaultVariant: .WAV
 	Variants:
-		atreides: .AUD
-		ordos: .AUD
-		smuggler: .WAV
-		harkonnen: .AUD
+        atreides: .AUD
+        ordos: .AUD
+        smuggler: .WAV
+        harkonnen: .AUD
+        mercenary: .AUD
 	Prefixes:
 		atreides: A
 		fremen: A
@@ -25,10 +26,11 @@ InfantryVoice:
 VehicleVoice:
 	DefaultVariant: .WAV
 	Variants:
-		atreides: .AUD
-		ordos: .AUD
-		smuggler: .WAV
-		harkonnen: .AUD
+        atreides: .AUD
+        ordos: .AUD
+        smuggler: .WAV
+        harkonnen: .AUD
+        mercenary: .AUD
 	Prefixes:
 		atreides: A
 		fremen: A
@@ -55,27 +57,27 @@ GenericVoice:
 		harkonnen: H
 		corrino: H
 
-VehicleVoice:
-	Prefixes:
-		atreides: A
-		fremen: A
-		ordos: O
-		smuggler: S
-		ix: S
-		mercenary: O
-		harkonnen: H
-		corrino: H
-
-InfantryVoice:
-	Prefixes:
-		atreides: A
-		fremen: A
-		ordos: O
-		smuggler: S
-		ix: S
-		mercenary: O
-		harkonnen: H
-		corrino: H
+#VehicleVoice:
+#	Prefixes:
+#		atreides: A
+#		fremen: A
+#		ordos: O
+#		smuggler: S
+#		ix: S
+#		mercenary: O
+#		harkonnen: H
+#		corrino: H
+#
+#InfantryVoice:
+#	Prefixes:
+#		atreides: A
+#		fremen: A
+#		ordos: O
+#		smuggler: S
+#		ix: S
+#		mercenary: O
+#		harkonnen: H
+#		corrino: H
 
 EngineerVoice:
 	Prefixes:

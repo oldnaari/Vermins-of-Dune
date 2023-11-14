@@ -1,10 +1,11 @@
 Speech:
 	DefaultVariant: .WAV
 	Variants:
-		atreides: .AUD
-		ordos: .AUD
-		smuggler: .WAV
-		harkonnen: .AUD
+        atreides: .AUD
+        ordos: .AUD
+        smuggler: .WAV
+        harkonnen: .AUD
+        mercenary: .AUD
 	Prefixes:
 		atreides: AI_
 		fremen: AI_
